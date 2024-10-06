@@ -1,0 +1,24 @@
+[user]
+	email = nairvarun104@gmail.com
+	name = Varun Nair
+[alias]
+	cl	= clone
+	s 	= status -sb
+	a 	= add
+	aa 	= add .
+	c 	= commit -m 
+	cc 	= commit -m '.'
+	b	= branch
+	bb	= branch -a
+	ss 	= switch
+	l	= log --oneline
+	g	= log --graph
+	gg	= log --graph --all
+	sc	= sparse-checkout
+[init]
+	defaultBranch = main
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
