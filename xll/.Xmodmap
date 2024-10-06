@@ -1,0 +1,13 @@
+! ~/.Xmodmap
+
+! caps_lock ==> ctrl
+! shift + caps_lock ==> caps_lock
+!
+! https://wiki.archlinux.org/title/xmodmap
+! https://forums.linuxmint.com/viewtopic.php?t=294096
+! https://www.reddit.com/r/i3wm/comments/2tvoqm/i_cant_run_xmodmap_on_startup/
+!
+clear lock
+clear control
+add control = Caps_Lock Control_L Control_R
+keycode 66 = Control_L Caps_Lock NoSymbol NoSymbol
