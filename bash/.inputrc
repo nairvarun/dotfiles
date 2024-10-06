@@ -1,0 +1,33 @@
+#[r] https://www.topbug.net/blog/2017/07/31/inputrc-for-humans/
+
+## carry over global config
+$include /etc/inputrc
+
+## case insensitive tab completion
+set completion-ignore-case On
+
+## vi mode config
+#[r] reddit.com/r/vim/comments/dcrf5f/vim_keybinds_in_the_python_repl_and_other/
+
+# change cursor based on mode
+set show-mode-in-prompt on
+set vi-ins-mode-string \1\e[5 q\2
+set vi-cmd-mode-string \1\e[2 q\2
+
+# less timeout between cursor change
+set keyseq-timeout 0
+
+# ctrl+l clears screen even in insert mode
+set keymap vi-insert 
+"\f": clear-screen
+
+## vi mode even in other programs that uses GNU readline (eg: python repl)
+set editing-mode vi
+
+## coloured completions
+set colored-stats On
+
+## autocomplete immediately
+# set show-all-if-ambiguous On
+# set show-all-if-unmodified On
+
