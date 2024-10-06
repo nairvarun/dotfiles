@@ -1,0 +1,16 @@
+vim.opt.mouse = 'a'
+vim.opt.cindent = false
+vim.opt.autoindent = false
+vim.opt.smartindent = false
+vim.opt.smarttab = true
+vim.opt.relativenumber = true
+vim.opt.number = false
+vim.opt.visualbell = true
+vim.opt.clipboard = 'unnamedplus'
+vim.opt.hlsearch = true
+vim.opt.ruler = true
+vim.opt.cursorline = true
+vim.opt.cursorcolumn = true
+vim.opt.background = 'light'
+vim.opt.foldmethod = 'marker'
+vim.opt.wrap = false

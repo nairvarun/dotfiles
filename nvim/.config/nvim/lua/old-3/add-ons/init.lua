@@ -1,0 +1,5 @@
+require ("user/add-ons/plugins")
+require ("user/add-ons/colorscheme")
+require ("user/add-ons/cmp")
+require ("user/add-ons/lsp")
+require ("user/add-ons/keymaps")

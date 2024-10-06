@@ -1,0 +1,10 @@
+require 'nv.addons.packer'
+require 'nv.addons.colorscheme'
+require 'nv.addons.treesitter'
+require 'nv.addons.telescope'
+require 'nv.addons.lspconfig'
+require 'nv.addons.cmp'
+require 'nv.addons.gitsigns'
+require 'nv.addons.emmet'
+require 'nv.addons.vim-slime'
+

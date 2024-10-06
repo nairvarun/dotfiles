@@ -1,0 +1,16 @@
+todo:
+	https://stackoverflow.com/questions/6230490/how-i-can-change-cursor-color-in-color-scheme-vim
+
+
+refs:
+	https://github.com/wbthomason/packer.nvim
+	https://dev.to/ritikadas/using-neovim-as-an-effortless-way-to-edit-code-installation-and-setup-guide-for-windows-10-5dhc
+	https://github.com/LunarVim/Neovim-from-scratch/
+
+
+colors:
+	https://vimcolorschemes.com/
+	https://github.com/mcchrish/vim-no-color-collections
+	https://github.com/rafi/awesome-vim-colorschemes
+	https://github.com/mswift42/vim-themes
+

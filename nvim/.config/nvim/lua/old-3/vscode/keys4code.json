@@ -1,0 +1,19 @@
+[
+    {
+        "command": "vscode-neovim.compositeEscape1",
+        "key": "j",
+        "when": "neovim.mode == insert && editorTextFocus",
+        "args": "j"
+    },
+    {
+        "command": "vscode-neovim.compositeEscape1",
+        "key": "k",
+        "when": "neovim.mode == insert && editorTextFocus",
+        "args": "k"
+    },
+    {
+        "key": "f l",
+        "command": "workbench.action.toggleZenMode",
+        "when": "neovim.mode == normal && editorTextFocus"
+    }
+]
