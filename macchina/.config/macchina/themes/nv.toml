@@ -1,16 +1,16 @@
-# Envy
+# nv
 
-spacing         = 2
-padding         = 2
-hide_ascii      = false
-separator       = "-->"
-key_color       = "Cyan"
-separator_color = "Magenta"
+spacing = 2
+padding = 0
+hide_ascii = true
+separator = ">"
+key_color = "Blue"
+separator_color = "Green"
 
 [palette]
 type = "Full"
-glyph = "</> "
-visible = false
+glyph = "󰊠 "
+visible = true
 
 [bar]
 glyph           = "ߋ"
