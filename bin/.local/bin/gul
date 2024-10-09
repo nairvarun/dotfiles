@@ -1,0 +1,2 @@
+#!/bin/bash
+cat '/home/nv/.local/share/gul/gul.sixel'
