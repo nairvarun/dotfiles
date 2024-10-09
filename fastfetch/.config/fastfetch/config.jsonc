@@ -12,12 +12,12 @@
     }
   },
   "display": {
-    "separator": ": ",
+    "separator": " ",
     "color": {
       "separator": "black"
     },
     "key": {
-      "type": "both"
+      "type": "icon"
     }
   },
   "modules": [
@@ -43,13 +43,13 @@
     },
     {
       "type": "terminal",
-      "keyIcon": "",
+      // "keyIcon": "",
       "key": "tr",
       "format": "{pretty-name}"
     },
     {
       "type": "shell",
-      "keyIcon": "",
+      "keyIcon": "",
       "key": "sh",
       "format": "{pretty-name}"
     },
