@@ -2,10 +2,13 @@
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
   "logo": {
     // "source": "fedora_small"
+    // "source": "~/.config/fastfetch/ascii/fedora_catppuccin"
     // "source": "~/.config/fastfetch/ascii/fedora_old_small"
     "source": "~/.config/fastfetch/ascii/cat",
     "padding": {
-      "top": 1
+      "top": 2,
+      "right": 6,
+      "left": 2
     }
   },
   "display": {
@@ -24,9 +27,11 @@
     //   "key": "hs",
     //   "format": "{user-name-colored}@{host-name-colored}"   // fastfetch -h title-format
     // },
+    "title",
+    "separator",
     {
       "type": "os",
-      "keyIcon": "󰣛",
+      // "keyIcon": "󰣛",
       "key": "os",
       "format": "{name}"   // fastfetch -h os-format
     },
@@ -48,11 +53,17 @@
       "key": "sh",
       "format": "{pretty-name}"
     },
-    {
-      "type": "uptime",
-      "key": "up",
-      "format": "{days}d:{hours}h"
-    }
+    // {
+    //   "type": "uptime",
+    //   "key": "up",
+    //   "format": "{days}d:{hours}h"
+    // },
+    // {
+    //   "type": "media",
+    //   "keyIcon": "󰝚",
+    //   "key": "mu",
+    //   "format": "{title}"
+    // },
     // {
     //   "type": "editor",
     //   "key": "ed",
@@ -62,10 +73,11 @@
     //   "type": "packages",
     //   "key": "pk",
     //   "format": "{all}"
-    // },
-    // {
-    //   "type": "colors",
-    //   "symbol": "square"
     // }
+    "break",
+    {
+      "type": "colors",
+      "symbol": "circle"
+    }
   ]
 }
