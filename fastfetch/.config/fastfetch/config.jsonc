@@ -31,7 +31,7 @@
     "separator",
     {
       "type": "os",
-      // "keyIcon": "󰣛",
+      "keyIcon": "󰣛",
       "key": "os",
       "format": "{name}"   // fastfetch -h os-format
     },
