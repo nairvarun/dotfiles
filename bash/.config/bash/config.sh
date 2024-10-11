@@ -6,7 +6,9 @@ set -o vi
 export EDITOR="/bin/vi"
 
 # prompt
-source ~/.config/bash/prompt.sh
+if [ -f ~/.config/bash/prompt.sh ]; then
+  source ~/.config/bash/prompt.sh
+fi
 
 # mkdir and then cd into it
 mkcd() {
@@ -52,7 +54,7 @@ alias whatismyip="curl https://checkip.amazonaws.com/"
 alias restart-pipewire='systemctl --user restart pipewire{,-pulse}.socket'
 
 # python config
-if command -v python3 > /dev/null; then
+if [ -f ~/.config/bash/python.sh ] && command -v python3 > /dev/null; then
   source ~/.config/bash/python.sh
 fi
 
