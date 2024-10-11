@@ -1,0 +1,13 @@
+#!/bin/python
+
+#TODO: not found
+#TODO: others repo
+
+import subprocess
+import sys
+
+gh_api = subprocess.Popen(["gh", "api", f"repos/nairvarun/{sys.argv[1]}"], stdout=subprocess.PIPE)
+output = subprocess.check_output(('jq', '.ssh_url'), stdin=gh_api.stdout)
+gh_api.wait()
+print(output.decode("utf-8")[1:-2])
+
