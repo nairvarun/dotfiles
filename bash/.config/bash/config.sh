@@ -33,6 +33,8 @@ alias ll="ls -alh"
 # git
 if command -v git > /dev/null; then
   alias g='git'
+  source /usr/share/bash-completion/completions/git
+  __git_complete g __git_main
 fi
 
 # use 256 colors in tmux
