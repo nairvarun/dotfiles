@@ -18,7 +18,7 @@ set vi-cmd-mode-string \1\e[2 q\2
 set keyseq-timeout 0
 
 # ctrl+l clears screen even in insert mode
-set keymap vi-insert 
+set keymap vi-insert
 "\f": clear-screen
 
 ## vi mode even in other programs that uses GNU readline (eg: python repl)
@@ -30,4 +30,3 @@ set colored-stats On
 ## autocomplete immediately
 # set show-all-if-ambiguous On
 # set show-all-if-unmodified On
-
