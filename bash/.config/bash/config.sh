@@ -10,6 +10,9 @@ if [ -f ~/.config/bash/prompt.sh ]; then
   source ~/.config/bash/prompt.sh
 fi
 
+# hack to fix clock issue due windows dual boot
+timedatectl set-local-rtc 1 --adjust-system-clock
+
 # mkdir and then cd into it
 mkcd() {
   mkdir $1
@@ -96,5 +99,7 @@ alias lazyvim="NVIM_APPNAME=nvim/LazyVim nvim"
 # alias astronvim="NVIM_APPNAME=nvim/AstroNvim nvim"
 # alias nvchad="NVIM_APPNAME=nvim/NvChad nvim"
 
-# hack to fix clock issue due windows dual boot
-timedatectl set-local-rtc 1 --adjust-system-clock
+# onefetch config
+if [ -f ~/.config/bash/onefetch.sh ] && command -v onefetch > /dev/null; then
+  source ~/.config/bash/onefetch.sh
+fi
