@@ -6,10 +6,13 @@ set -o vi
 # set vi as default text editor
 export EDITOR="/bin/vi"
 
-# prompt
+# my prompt
 if [ -f ~/.config/bash/prompt.sh ]; then
   source ~/.config/bash/prompt.sh
 fi
+
+# # starship prompt
+# eval "$(starship init bash)"
 
 # hack to fix clock issue due windows dual boot
 timedatectl set-local-rtc 1 --adjust-system-clock
