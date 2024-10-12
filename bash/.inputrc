@@ -1,4 +1,4 @@
-#[r] https://www.topbug.net/blog/2017/07/31/inputrc-for-humans/
+# https://www.topbug.net/blog/2017/07/31/inputrc-for-humans/
 
 ## carry over global config
 $include /etc/inputrc
@@ -7,7 +7,7 @@ $include /etc/inputrc
 set completion-ignore-case On
 
 ## vi mode config
-#[r] reddit.com/r/vim/comments/dcrf5f/vim_keybinds_in_the_python_repl_and_other/
+# reddit.com/r/vim/comments/dcrf5f/vim_keybinds_in_the_python_repl_and_other/
 
 # change cursor based on mode
 set show-mode-in-prompt on
