@@ -94,7 +94,7 @@ fi
 
 # minikube
 # https://minikube.sigs.k8s.io/docs/commands/completion/
-if command -v kind > /dev/null; then
+if command -v minikube > /dev/null; then
   source <(minikube completion bash)
 fi
 
