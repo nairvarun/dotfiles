@@ -3,6 +3,7 @@
 # vi mode
 set -o vi
 
+# set vi as default text editor
 export EDITOR="/bin/vi"
 
 # prompt
