@@ -49,15 +49,14 @@ _pyvenv() {
   fi
 }
 
-export PS1="$RED\`_pyvenv\`$ENDC$MAGENTA(\`_tmux\`\W)$ENDC$GREEN\`_git\`$ENDC$BLUE\`_k8s\`$ENDC "
 
-# . ~/.bashrc.d/git-prompt.sh
-# GIT_PS1_SHOWDIRTYSTATE=0
-# GIT_PS1_SHOWSTASHSTATE=0
-# GIT_PS1_SHOWUNTRACKEDFILES=0
-# GIT_PS1_SHOWUPSTREAM=0
-# GIT_PS1_SHOWCONFLICTSTATE="yes"
+. ~/.bashrc.d/git-prompt.sh
+GIT_PS1_SHOWDIRTYSTATE=0
+GIT_PS1_SHOWSTASHSTATE=0
+GIT_PS1_SHOWUNTRACKEDFILES=0
+GIT_PS1_SHOWUPSTREAM=0
+GIT_PS1_SHOWCONFLICTSTATE="yes"
 # GIT_PS1_SHOWCOLORHINTS=0
-# GIT_PS1_STATESEPARATOR=''
-# export PS1='[$(_pyvenv "(%s )")\W$(__git_ps1 " (%s)")] '
-
+GIT_PS1_STATESEPARATOR=''
+export PS1="$RED\`_pyvenv\`$ENDC$MAGENTA(\`_tmux\`\W)$ENDC`__git_ps1 "$GREEN[%s]$ENDC"`$BLUE\`_k8s\`$ENDC "
+# export PS1="$RED\`_pyvenv\`$ENDC$MAGENTA(\W)$ENDC`__git_ps1 "$GREEN[%s]$ENDC"`$BLUE\`_k8s\`$ENDC "
