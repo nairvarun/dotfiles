@@ -7,8 +7,8 @@ set -o vi
 export EDITOR="/bin/vi"
 
 # my prompt
-if [ -f ~/.config/bash/prompt.sh ]; then
-  source ~/.config/bash/prompt.sh
+if [ -f ~/.bashrc.d/prompt.sh ]; then
+  . ~/.bashrc.d/prompt.sh
 fi
 
 # # starship prompt
@@ -23,8 +23,8 @@ mkcd() {
   cd $1
 }
 
-# source bash config
-alias sbc="source ~/.bashrc"
+# source bashrc
+alias sbc=". ~/.bashrc"
 
 # open stuff
 alias xx="xdg-open $1 &>/dev/null"
@@ -42,7 +42,7 @@ alias ll="ls -alh"
 # git
 if command -v git > /dev/null; then
   alias g='git'
-  source /usr/share/bash-completion/completions/git
+  . /usr/share/bash-completion/completions/git
   __git_complete g __git_main
 fi
 
@@ -61,8 +61,8 @@ alias whatismyip="curl https://checkip.amazonaws.com/"
 alias restart-pipewire='systemctl --user restart pipewire{,-pulse}.socket'
 
 # python config
-if [ -f ~/.config/bash/python.sh ] && command -v python3 > /dev/null; then
-  source ~/.config/bash/python.sh
+if [ -f ~/.bashrc.d/python.sh ] && command -v python3 > /dev/null; then
+  . ~/.bashrc.d/python.sh
 fi
 
 # run go files
@@ -82,20 +82,20 @@ fi
 # kubectl
 # https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#enable-shell-autocompletion
 if command -v kubectl > /dev/null; then
-  source <(kubectl completion bash)
+  . <(kubectl completion bash)
   alias k='kubectl'
   complete -o default -F __start_kubectl k
 fi
 
 # kind
 if command -v kind > /dev/null; then
-  source <(kind completion bash)
+  . <(kind completion bash)
 fi
 
 # minikube
 # https://minikube.sigs.k8s.io/docs/commands/completion/
 if command -v minikube > /dev/null; then
-  source <(minikube completion bash)
+  . <(minikube completion bash)
 fi
 
 # neovim
@@ -104,6 +104,6 @@ alias lazyvim="NVIM_APPNAME=nvim/LazyVim nvim"
 # alias nvchad="NVIM_APPNAME=nvim/NvChad nvim"
 
 # onefetch config
-if [ -f ~/.config/bash/onefetch.sh ] && command -v onefetch > /dev/null; then
-  source ~/.config/bash/onefetch.sh
+if [ -f ~/.bashrc.d/onefetch.sh ] && command -v onefetch > /dev/null; then
+  . ~/.bashrc.d/onefetch.sh
 fi

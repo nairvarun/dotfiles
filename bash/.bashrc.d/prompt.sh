@@ -10,16 +10,16 @@ CYAN='\[\e[36m\]'
 WHITE='\[\e[37m\]'
 ENDC='\[\e[m\]'
 
-function _k8s {
+_k8s() {
   CLUSTER=$(kubectl config current-context 2> /dev/null)
-  if [ ! "${CLUSTER}" == "" ]; then
-    echo "[${CLUSTER}]"
+  if [ -n "$CLUSTER" ]; then
+    echo "[$CLUSTER]"
   else
     echo ""
   fi
 }
 
-function _git {
+_git() {
   BRANCH=$(git branch --show-current 2> /dev/null)
   if [ -n "$BRANCH" ]; then
     if [ -z "$(git status --porcelain)" ]; then
@@ -33,7 +33,7 @@ function _git {
   fi
 }
 
-function _tmux {
+_tmux() {
   if [ ! "$(echo $TMUX)" == "" ]; then
     echo "'"
   else
@@ -41,12 +41,23 @@ function _tmux {
   fi
 }
 
-function _pyvenv {
+_pyvenv() {
   if [ -z "$VIRTUAL_ENV" ]; then
-  echo ""
+    echo ""
   else
-  echo [`basename $VIRTUAL_ENV`]
+    echo [`basename $VIRTUAL_ENV`]
   fi
 }
 
 export PS1="$RED\`_pyvenv\`$ENDC$MAGENTA(\`_tmux\`\W)$ENDC$GREEN\`_git\`$ENDC$BLUE\`_k8s\`$ENDC "
+
+# . ~/.bashrc.d/git-prompt.sh
+# GIT_PS1_SHOWDIRTYSTATE=0
+# GIT_PS1_SHOWSTASHSTATE=0
+# GIT_PS1_SHOWUNTRACKEDFILES=0
+# GIT_PS1_SHOWUPSTREAM=0
+# GIT_PS1_SHOWCONFLICTSTATE="yes"
+# GIT_PS1_SHOWCOLORHINTS=0
+# GIT_PS1_STATESEPARATOR=''
+# export PS1='[$(_pyvenv "(%s )")\W$(__git_ps1 " (%s)")] '
+
