@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/bin/sh
 cat '/home/nv/.local/share/gul/gul.sixel'

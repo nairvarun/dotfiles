@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 MEDIA_PATH="/home/nv/.local/share/ohhnoo/"
 OHHNO="$MEDIA_PATH$(ls $MEDIA_PATH | shuf -n 1)"
 (ffplay -autoexit -nodisp -hide_banner -loglevel error $OHHNO &>/dev/null & disown)
