@@ -99,9 +99,9 @@ if command -v minikube > /dev/null; then
 fi
 
 # neovim
-alias lazyvim="NVIM_APPNAME=nvim/LazyVim nvim"
-# alias astronvim="NVIM_APPNAME=nvim/AstroNvim nvim"
-# alias nvchad="NVIM_APPNAME=nvim/NvChad nvim"
+if [ -d ~/.config/nvim/LazyVim ] && command -v nvim > /dev/null; then
+  alias lazyvim="NVIM_APPNAME=nvim/LazyVim nvim"
+fi
 
 # onefetch config
 if [ -f ~/.bashrc.d/onefetch.sh ] && command -v onefetch > /dev/null; then
