@@ -1,0 +1,3 @@
+#!/bin/sh
+
+systemctl --user restart pipewire{,-pulse}.socket

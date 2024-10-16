@@ -1,0 +1,16 @@
+#!/bin/bash
+
+case $1 in
+	kubectl)
+		/usr/local/bin/kubectl completion bash > /usr/share/bash-completion/completions/kubectl ;;
+	
+	kind)
+		/home/nv/go/bin/kind completion bash > /usr/share/bash-completion/completions/kind ;;
+
+	minikube)
+		/usr/bin/minikube completion bash > /usr/share/bash-completion/completions/minikube ;;
+
+	*)
+		echo "Options should be one of - kubectl, kind, minikube"
+esac
+
