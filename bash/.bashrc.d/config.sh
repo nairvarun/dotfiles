@@ -6,22 +6,25 @@ set -o vi
 # set vi as default text editor
 export EDITOR="/bin/vi"
 
-# my prompt
-if [ -f ~/.bashrc.d/prompt.sh ]; then
-  . ~/.bashrc.d/prompt.sh
+# # my prompt
+# if [ -f ~/.bashrc.d/prompt.sh ]; then
+#   . ~/.bashrc.d/prompt.sh
+# fi
+
+# starship prompt
+eval "$(starship init bash)"
+
+# # hack to fix clock issue due windows dual boot
+# timedatectl set-local-rtc 1 --adjust-system-clock
+
+# load functions
+if [ -d ~/.bashrc.d/functions ]; then
+  for fn in ~/.bashrc.d/functions/*; do
+    if [ -f "$fn" ]; then
+      . "$fn"
+    fi
+  done
 fi
-
-# # starship prompt
-# eval "$(starship init bash)"
-
-# hack to fix clock issue due windows dual boot
-timedatectl set-local-rtc 1 --adjust-system-clock
-
-# mkdir and then cd into it
-mkcd() {
-  mkdir $1
-  cd $1
-}
 
 # source bashrc
 alias sbc=". ~/.bashrc"
@@ -54,12 +57,6 @@ fi
 # force start btop even if no UTF-8 locale was detected
 alias btop="btop --utf-force"
 
-# get public ip
-alias whatismyip="curl https://checkip.amazonaws.com/"
-
-# restart pipewire
-alias restart-pipewire='systemctl --user restart pipewire{,-pulse}.socket'
-
 # python config
 if [ -f ~/.bashrc.d/python.sh ] && command -v python3 > /dev/null; then
   . ~/.bashrc.d/python.sh
@@ -72,30 +69,6 @@ if command -v go > /dev/null; then
   function gr {
     go run $1.go
   }
-fi
-
-# docker
-if command -v docker > /dev/null; then
-  alias d='docker'
-fi
-
-# kubectl
-# https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#enable-shell-autocompletion
-if command -v kubectl > /dev/null; then
-  . <(kubectl completion bash)
-  alias k='kubectl'
-  complete -o default -F __start_kubectl k
-fi
-
-# kind
-if command -v kind > /dev/null; then
-  . <(kind completion bash)
-fi
-
-# minikube
-# https://minikube.sigs.k8s.io/docs/commands/completion/
-if command -v minikube > /dev/null; then
-  . <(minikube completion bash)
 fi
 
 # neovim
