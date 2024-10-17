@@ -6,6 +6,10 @@ set -o vi
 # set vi as default text editor
 export EDITOR="/bin/vi"
 
+# longer history
+export HISTSIZE=5000
+export HISTFILESIZE=5000
+
 # # my prompt
 # if [ -f ~/.bashrc.d/prompt.sh ]; then
 #   . ~/.bashrc.d/prompt.sh

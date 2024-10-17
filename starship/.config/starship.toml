@@ -1,0 +1,44 @@
+format = """
+$python\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$docker_context\
+$kubernetes """
+
+add_newline = false
+
+[git_branch]
+format = '[\[$branch(:$remote_branch)\]]($style)'
+only_attached = true
+style = "green"
+
+[git_commit]
+format = '[\[$hash$tag\]]($style)'
+tag_symbol = '-'
+tag_disabled = false
+style = "green"
+
+[git_state]
+format = '[\[$state( $progress_current/$progress_total)\]]($style)'
+style = "green"
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style))'
+style = "red"
+
+[directory]
+format = '[\($path\)]($style)[$read_only]($read_only_style)'
+truncation_length = 1
+style = "purple"
+
+[python]
+format = '[(\[$virtualenv\])]($style)'
+style = "red"
+
+[kubernetes]
+disabled = false
+format = '[\[$context(\($namespace\))\]]($style)'
+style = "blue"
