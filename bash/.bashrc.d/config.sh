@@ -6,6 +6,9 @@ set -o vi
 # set vi as default text editor
 export EDITOR="/bin/vi"
 
+# set LS_COLORS
+eval "$(dircolors -b ~/.bashrc.d/DIR_COLORS)"
+
 # longer history
 export HISTSIZE=5000
 export HISTFILESIZE=5000
