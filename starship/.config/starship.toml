@@ -32,6 +32,7 @@ format = '[\[$state( $progress_current/$progress_total)\]]($style)'
 style = "green"
 
 [git_status]
+deleted = 'x'
 format = '([\[$all_status$ahead_behind\]]($style))'
 style = "red"
 
