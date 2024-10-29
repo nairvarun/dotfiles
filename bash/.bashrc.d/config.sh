@@ -87,3 +87,8 @@ fi
 if [ -f ~/.bashrc.d/onefetch.sh ] && command -v onefetch > /dev/null; then
   . ~/.bashrc.d/onefetch.sh
 fi
+
+# fzf config
+if [ -f ~/.bashrc.d/fzf.sh ] && command -v fzf > /dev/null; then
+  . ~/.bashrc.d/fzf.sh
+fi
