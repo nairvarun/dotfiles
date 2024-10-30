@@ -3,8 +3,7 @@
 from pathlib import Path
 from datetime import datetime
 
-license = f'''
-MIT License
+license = f'''MIT License
 
 Copyright (c) {datetime.now().year} Varun Sudheer Nair
 
