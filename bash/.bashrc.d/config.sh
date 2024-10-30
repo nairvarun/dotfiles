@@ -4,7 +4,7 @@
 set -o vi
 
 # set vi as default text editor
-export EDITOR="/bin/vi"
+export EDITOR="/bin/nvim"
 
 # set LS_COLORS
 eval "$(dircolors -b ~/.bashrc.d/DIR_COLORS)"
@@ -43,7 +43,7 @@ alias xx="xdg-open $1 &>/dev/null"
 alias dev='cd ~/dev/'
 
 # scratch file
-alias q="$EDITOR ~/.q.md"
+alias q='$EDITOR ~/notes/dump/$(date +%s).md'
 
 # convenient ls
 alias la="ls -a"
