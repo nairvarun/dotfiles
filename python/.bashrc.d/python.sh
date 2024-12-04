@@ -12,9 +12,9 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 # if the exit code == 1, it will run `ohhnoo`
 p() {
   python3 -q $@
-  if [ $? == 1 ]; then
-    ohhnoo
-  fi
+  # if [ $? == 1 ]; then
+  #   ohhnoo
+  # fi
 }
 
 # activate .venv if .venv dir is present

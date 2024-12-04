@@ -41,6 +41,7 @@ alias xx="xdg-open $1 &>/dev/null"
 
 # cd directly into dev directory
 alias dev='cd ~/dev/'
+alias wrk='cd ~/wrk/'
 
 # scratch file
 alias q='$EDITOR ~/notes/dump/$(date +%s).md'
