@@ -8,7 +8,7 @@ alias onefetch="onefetch \
 	--text-colors 4 7 7 4 4 7 \
 	--number-separator comma \
 	--true-color never \
-	--image /home/nv/Pictures/onefetch/rei.jpg \
+	--image /home/nv/.local/share/onefetch/rei.jpg \
 	--image-protocol sixel \
 	--no-color-palette \
 	--nerd-fonts"
