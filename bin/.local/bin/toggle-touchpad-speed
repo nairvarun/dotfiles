@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ $(gsettings get org.gnome.desktop.peripherals.touchpad speed) = 1.0 ]; then
-	gsettings set org.gnome.desktop.peripherals.touchpad speed 0.5
+	gsettings set org.gnome.desktop.peripherals.touchpad speed 0
 else
 	gsettings set org.gnome.desktop.peripherals.touchpad speed 1
 fi

@@ -70,8 +70,12 @@ if [ -f ~/.bashrc.d/python.sh ] && command -v python3 > /dev/null; then
   . ~/.bashrc.d/python.sh
 fi
 
+# go path
+export PATH=$PATH:/usr/local/go/bin:/home/nv/go/bin
+
 # run go files
 if command -v go > /dev/null; then
+  # ?? how will go be a command if path is not exported first??
   export PATH=$PATH:/usr/local/go/bin:/home/nv/go/bin
 
   function gr {
@@ -93,3 +97,7 @@ fi
 if [ -f ~/.bashrc.d/fzf.sh ] && command -v fzf > /dev/null; then
   . ~/.bashrc.d/fzf.sh
 fi
+
+# aws completion
+complete -C '/usr/local/bin/aws_completer' aws
+
