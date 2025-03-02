@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+import os
+import subprocess
+from pathlib import Path
+
+
+def main():
+    # Get the user's editor from the environment variables or use default "nano"
+    editor = os.getenv('EDITOR', 'nano')
+
+    # Path to the temporary file
+    temp_file = "/tmp/aws_credentials.tmp"
+
+    try:
+        # Open the editor and create/edit the temporary file
+        subprocess.run([editor, temp_file], check=True)
+
+        # Ensure the temporary file exists and has content
+        if not os.path.exists(temp_file) or os.path.getsize(temp_file) == 0:
+            print("No content added to the editor. Aborting.")
+            return
+
+        # Read the content of the temporary file
+        with open(temp_file, "r") as file:
+            credentials_content = file.read()
+
+        # Path to the AWS credentials file
+        aws_credentials_path = Path.home() / ".aws" / "credentials"
+
+        # Write the new credentials to the file
+        with open(aws_credentials_path, "w") as file:
+            file.write("[default]\n")
+            file.write("\n".join(credentials_content.splitlines()[1:]))
+
+        print(f"New AWS credentials have been written to: {aws_credentials_path}")
+
+    finally:
+        # Clean up: remove the temporary file
+        if os.path.exists(temp_file):
+            os.remove(temp_file)
+
+
+if __name__ == "__main__":
+    main()

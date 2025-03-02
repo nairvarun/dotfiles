@@ -1,0 +1,42 @@
+session_name: hyperface-dev
+is_default: true
+windows:
+  - name: ironbank
+    commands:
+      - export JAVA_HOME=/home/nv/.sdkman/candidates/java/17.0.13-amzn
+      - cd /home/nv/wrk/ironbank
+      - ./gradlew bootRun
+  - name: doraemon
+    panes:
+      - commands:
+          - export JAVA_HOME=/home/nv/.sdkman/candidates/java/11.0.25-amzn
+          - cd /home/nv/wrk/doraemon
+          - ./gradlew bootRun
+        size: 90
+      - commands:
+          - /home/nv/wrk/temporalite/temporalite start --namespace default
+        size: 10
+    maximize_pane: 0 # index of the pane you want to maximize
+
+# ---
+# session_name: dummy
+# is_default: false
+# windows:
+#   - name: a
+#     commands:
+#       - vim
+#   - name: example-splits
+#     panes:
+#       - commands:
+#           - top
+#         size: 50
+#         split: vertical
+#       - commands:
+#           - htop
+#         size: 50
+#         split: horizontal
+#       - commands:
+#           - vim
+#         size: 30
+#         split: vertical
+#     maximize_pane: None

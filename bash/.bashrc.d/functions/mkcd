@@ -2,6 +2,6 @@
 
 # mkdir and then cd into it
 mkcd() {
-  mkdir $1
+  mkdir $1 -p
   cd $1
 }
