@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
 import os
 import subprocess
+import webbrowser
 from pathlib import Path
 
 
 def main():
+
+    # Open the AWS Management Console in the default web browser
+    webbrowser.open("https://hyperface-infra.awsapps.com/start/#")
+    
     # Get the user's editor from the environment variables or use default "nano"
     editor = os.getenv('EDITOR', 'nano')
 
