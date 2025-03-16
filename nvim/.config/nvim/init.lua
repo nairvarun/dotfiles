@@ -1,3 +1,3 @@
 require 'nv.default'
-require 'nv.addons'
+-- require 'nv.addons'
 

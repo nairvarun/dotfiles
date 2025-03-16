@@ -3,13 +3,13 @@ is_default: true
 windows:
   - name: ironbank
     commands:
-      - export JAVA_HOME=/home/nv/.sdkman/candidates/java/17.0.13-amzn
+      - export JAVA_HOME=/home/nv/.jdks/corretto-17.0.14
       - cd /home/nv/wrk/ironbank
       - ./gradlew bootRun
   - name: doraemon
     panes:
       - commands:
-          - export JAVA_HOME=/home/nv/.sdkman/candidates/java/11.0.25-amzn
+          - export JAVA_HOME=/home/nv/.jdks/corretto-11.0.26
           - cd /home/nv/wrk/doraemon
           - ./gradlew bootRun
         size: 90
