@@ -9,10 +9,12 @@ import argparse
 
 def run_tmux_command(cmd):
     """Run a tmux command and return its output"""
+    print(cmd)
     try:
         result = subprocess.run(['tmux'] + cmd, capture_output=True, text=True, check=True)
         return result.stdout.strip()
-    except subprocess.CalledProcessError:
+    except subprocess.CalledProcessError as e:
+        print('Error:', e)
         return None
 
 
@@ -62,7 +64,7 @@ def create_session(config):
             for pane_index, pane in enumerate(window['panes'][1:], start=1):
                 split_direction = '-h' if pane.get('split', 'vertical').lower() == 'horizontal' else '-v'
                 run_tmux_command(['split-window', '-t', f'{session_name}:{window_index}',
-                                  split_direction, '-p', str(pane['size'])])
+                                  split_direction, '-l', f'{str(pane['size'])}%'])
                 for cmd in pane['commands']:
                     run_tmux_command(['send-keys', '-t', f'{session_name}:{window_index}.{pane_index}',
                                       cmd, 'C-m'])
