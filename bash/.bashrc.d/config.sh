@@ -4,7 +4,7 @@
 set -o vi
 
 # set vi as default text editor
-export EDITOR="/bin/nvim"
+export EDITOR="/snap/bin/nvim"
 
 # set LS_COLORS
 eval "$(dircolors -b ~/.bashrc.d/DIR_COLORS)"
