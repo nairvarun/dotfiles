@@ -11,7 +11,7 @@ def main():
     webbrowser.open("https://hyperface-infra.awsapps.com/start/#")
     
     # Get the user's editor from the environment variables or use default "nano"
-    editor = os.getenv('EDITOR', 'nano')
+    editor = os.getenv('EDITOR', 'vi')
 
     # Path to the temporary file
     temp_file = "/tmp/aws_credentials.tmp"
