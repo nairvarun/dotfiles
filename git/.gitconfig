@@ -15,6 +15,8 @@
 	g	= log --graph
 	gg	= log --graph --all
 	sc	= sparse-checkout
+	st	= stash
+	stp	= stash pop
 [init]
 	defaultBranch = main
 [filter "lfs"]
@@ -22,3 +24,6 @@
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+[includeIf "gitdir:~/wrk/"]
+  path = .gitconfig-hf
+
