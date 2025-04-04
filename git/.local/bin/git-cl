@@ -45,7 +45,7 @@ def main():
         match args:
             case [_]:
                 print(f"Invalid number of args: {len(args)}")
-                print("Usage: $SCRIPT$ (repository_url) [destination_path]")
+                print("Usage: $SCRIPT$ [account] (repository_url)")
                 return 1
             case [_, url]:
                 git_clone(url)
