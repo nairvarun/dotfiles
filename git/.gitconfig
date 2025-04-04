@@ -2,7 +2,7 @@
 	email = nairvarun104@gmail.com
 	name = Varun Nair
 [alias]
-	cl	= clone
+	cl	= !git-cl
 	s 	= status -sb
 	a 	= add
 	aa 	= add .
@@ -15,7 +15,7 @@
 	g	= log --graph
 	gg	= log --graph --all
 	sc	= sparse-checkout
-	st	= stash
+	st	= stash --all
 	stp	= stash pop
 [init]
 	defaultBranch = main
