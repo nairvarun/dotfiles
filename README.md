@@ -1,1 +1,1 @@
-![Gemini_Generated_Image_au523jau523jau52](https://github.com/user-attachments/assets/528aba09-7bff-44b7-bda3-9f65fda97ca7)
+![Brr Brr Patapim X Boneca Ambalabu](https://github.com/user-attachments/assets/fec33065-0e28-4641-8194-d6d41988538f)
