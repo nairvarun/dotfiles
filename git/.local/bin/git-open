@@ -18,7 +18,7 @@ def main():
             url = remote
         else:
             # ssh remote
-            pattern = r'\w+@(\w+.\w+):(.*)'
+            pattern = r'git@(\w+\.\w+).*:(.*)'  # this will cause issue if the top level domain is a .x.y type domain
             res = re.search(pattern, remote)
             url = f'https://{res.group(1)}/{res.group(2)}'
         
