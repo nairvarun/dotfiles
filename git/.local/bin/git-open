@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+
+import subprocess
+import sys
+import os
+import re
+import webbrowser
+
+
+def main():
+    try:
+        args = sys.argv
+        assert len(args) != 1, "exactly 1 arg required"
+
+        remote = args[1]
+        # http remote
+        if remote.startswith('https://'):
+            url = remote
+        else:
+            # ssh remote
+            pattern = r'\w+@(\w+.\w+):(.*)'
+            res = re.search(pattern, remote)
+            url = f'https://{res.group(1)}/{res.group(2)}'
+        
+        webbrowser.open(url)
+        return 0
+
+    except Exception as e:
+        print(e)
+        return 1
+
+if __name__ == "__main__":
+    main()
+

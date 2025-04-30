@@ -17,6 +17,7 @@
 	sc	= sparse-checkout
 	st	= stash --all
 	stp	= stash pop
+	o	= !git remote get-url origin | xargs git-open
 [init]
 	defaultBranch = main
 [filter "lfs"]
