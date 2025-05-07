@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Generate a random number (0 or 1)
+random_number=$((RANDOM % 2))
+
+# Use the random number to pick a color
+if [ "$random_number" -eq 0 ]; then
+  picked_color="🟥 red"
+else
+  picked_color="⬛ black"
+fi
+
+# Print the picked color
+echo "$picked_color ✨"
+

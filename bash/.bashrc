@@ -142,3 +142,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# Wasmer
+export WASMER_DIR="/home/nv/.wasmer"
+[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
