@@ -10,6 +10,9 @@ case $1 in
 	minikube)
 		/usr/bin/minikube completion bash > /usr/share/bash-completion/completions/minikube ;;
 
+	gcloud)
+		sudo ln -s /snap/google-cloud-cli/current/completion.bash.inc /usr/share/bash-completion/completions/gcloud ;;
+
 	*)
 		echo "Options should be one of - kubectl, kind, minikube"
 esac

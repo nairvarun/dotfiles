@@ -15,7 +15,7 @@
 	g	= log --graph
 	gg	= log --graph --all
 	sc	= sparse-checkout
-	st	= stash --all
+	st	= stash
 	stp	= stash pop
 	o	= !git remote get-url origin | xargs git-open
 [init]
