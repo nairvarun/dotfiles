@@ -1,0 +1,4 @@
+stow
+bat
+starship
+tmux

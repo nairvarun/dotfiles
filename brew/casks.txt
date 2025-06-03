@@ -1,0 +1,8 @@
+whatsapp
+slack
+google-chrome
+brave-browser
+visual-studio-code
+jetbrains-toolbox
+claude
+iterm2
