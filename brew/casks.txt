@@ -6,3 +6,4 @@ visual-studio-code
 jetbrains-toolbox
 claude
 iterm2
+font-hack-nerd-font

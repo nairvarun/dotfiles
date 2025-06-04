@@ -9,3 +9,5 @@ eval "$(starship init zsh)"
 alias g="git"
 alias t="tmux"
 
+# path
+export PATH="$HOME/.local/bin:$PATH"
