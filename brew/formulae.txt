@@ -2,3 +2,5 @@ stow
 bat
 starship
 tmux
+uv
+pipx

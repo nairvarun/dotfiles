@@ -3,7 +3,11 @@ slack
 google-chrome
 brave-browser
 visual-studio-code
+cursor
 jetbrains-toolbox
 claude
 iterm2
 font-hack-nerd-font
+pritunl
+steam
+ollama
