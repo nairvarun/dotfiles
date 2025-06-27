@@ -10,4 +10,3 @@ iterm2
 font-hack-nerd-font
 pritunl
 steam
-ollama

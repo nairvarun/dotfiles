@@ -4,3 +4,6 @@ starship
 tmux
 uv
 pipx
+nvm
+ollama
+neovim
