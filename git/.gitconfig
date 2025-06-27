@@ -2,7 +2,7 @@
 	email = nairvarun104@gmail.com
 	name = Varun Nair
 [alias]
-	cl	= clone
+	cl	= !git-cl
 	s 	= status -sb
 	a 	= add
 	aa 	= add .

@@ -25,6 +25,9 @@ source "$HOME/.secrets"
 # path
 export PATH="$HOME/.local/bin:$PATH"
 
+# postgresql
+export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
