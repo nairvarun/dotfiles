@@ -7,3 +7,4 @@ pipx
 nvm
 ollama
 neovim
+nginx
