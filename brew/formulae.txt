@@ -10,3 +10,5 @@ neovim
 nginx
 awscli
 zoxide
+fzf
+ripgrep
