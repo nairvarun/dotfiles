@@ -9,3 +9,4 @@ ollama
 neovim
 nginx
 awscli
+zoxide
