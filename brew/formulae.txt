@@ -12,3 +12,8 @@ awscli
 zoxide
 fzf
 ripgrep
+mysql
+hashicorp/tap/terraform
+helm
+derailed/k9s/k9s
+kubeseal

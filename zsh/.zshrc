@@ -16,13 +16,15 @@ alias g="git"
 alias p="python3"
 alias venv="source ./.venv/bin/activate"
 alias t="tmux"
+alias tf="terraform"
+alias d="docker"
+alias k="kubectl"
 alias sc="source ~/.zshrc"
 
 # functions
 # mkdir and then cd into it
 mkcd() {
-  mkdir "$1" -p
-  cd "$1"
+  mkdir -p "$1" && cd "$1"
 }
 
 # source secrets
@@ -193,3 +195,14 @@ fi
 #
 # eval "$(zoxide init zsh)"
 
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/nv/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
+
+# kubectl completions
+source <(kubectl completion zsh)
+
+# minikube completions
+source <(minikube completion zsh)

@@ -11,3 +11,5 @@ font-hack-nerd-font
 pritunl
 steam
 bruno
+docker-desktop
+wireshark-app
