@@ -17,3 +17,6 @@ hashicorp/tap/terraform
 helm
 derailed/k9s/k9s
 kubeseal
+kubectx
+fluxcd/tap/flux
+stern
