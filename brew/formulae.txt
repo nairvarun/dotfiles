@@ -20,3 +20,7 @@ kubeseal
 kubectx
 fluxcd/tap/flux
 stern
+nmap
+kubectl-cnpg
+watch
+gcloud-cli
