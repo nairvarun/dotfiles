@@ -1,53 +1,41 @@
 format = """
-$python\
-$aws\
 $directory\
 $git_branch\
-$git_commit\
-$git_state\
 $git_status\
-$docker_context\
-$kubernetes """
-
-add_newline = false
+$git_state\
+$kubernetes\
+$line_break\
+$python\
+$character"""
 
 [directory]
-format = '[\($path\)]($style)[$read_only]($read_only_style)'
-truncation_length = 1
-style = "purple"
+style = 'dimmed purple'
+
+[character]
+success_symbol = '[❯](dimmed green)'
+error_symbol = '[❯](dimmed red)'
+vimcmd_symbol = '[❮](dimmed green)'
 
 [git_branch]
-format = '[\[$branch(:$remote_branch)\]]($style)'
-only_attached = true
-style = "green"
-
-[git_commit]
-format = '[\[$hash$tag\]]($style)'
-tag_symbol = '-'
-tag_disabled = false
-style = "green"
-
-[git_state]
-format = '[\[$state( $progress_current/$progress_total)\]]($style)'
-style = "green"
+format = '[$branch]($style) '
+style = 'dimmed green'
 
 [git_status]
-deleted = 'x'
-format = '([\[$all_status$ahead_behind\]]($style))'
-style = "red"
+format = '([\($all_status$ahead_behind\)]($style)) '
+style = 'dimmed green'
 
-[python]
-format = '[(\[$virtualenv\])]($style)'
-symbol = " "
-style = "red"
-
-[aws]
-format = '[($profile@)(\[$region\])(\[$duration\])]($style)'
-symbol = "  "
-style = "yellow"
+[git_state]
+format = '\([$state($progress_current/$progress_total)]($style)\) '
+style = 'dimmed green'
 
 [kubernetes]
+format = '[$context]($style)( [\($namespace\)]($style)) '
+style = 'dimmed blue'
 disabled = false
-format = '[\[$context(\($namespace\))\]]($style)'
-symbol = "󱃾 "
-style = "blue"
+contexts = [
+  { context_pattern = "gke_ncb-dev-project_asia-south1_ncb-dev-cluster", context_alias = "ncb-dev"},
+]
+
+[python]
+format = '([$virtualenv]($style) )'
+style = 'bright-black'
