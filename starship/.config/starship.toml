@@ -9,28 +9,29 @@ $python\
 $character"""
 
 [directory]
-style = 'dimmed purple'
+# style = 'dimmed purple'
+style = 'bold bright-black'
 
 [character]
-success_symbol = '[❯](dimmed green)'
-error_symbol = '[❯](dimmed red)'
-vimcmd_symbol = '[❮](dimmed green)'
+success_symbol = '[❯](bold bright-black)'
+error_symbol = '[❯](bold dimmed red)'
+vimcmd_symbol = '[❮](bold bright-black)'
 
 [git_branch]
 format = '[$branch]($style) '
-style = 'dimmed green'
+style = 'bold dimmed green'
 
 [git_status]
 format = '([\($all_status$ahead_behind\)]($style) )'
-style = 'dimmed green'
+style = 'bold dimmed green'
 
 [git_state]
 format = '(\([$state($progress_current/$progress_total)]($style)\) )'
-style = 'dimmed green'
+style = 'bold dimmed green'
 
 [kubernetes]
 format = '[$context]($style)( [\($namespace\)]($style)) '
-style = 'dimmed blue'
+style = 'bold dimmed blue'
 disabled = false
 contexts = [
   { context_pattern = "gke_ncb-dev-project_asia-south1_ncb-dev-cluster", context_alias = "ncb-dev"},
@@ -38,4 +39,4 @@ contexts = [
 
 [python]
 format = '([$virtualenv]($style) )'
-style = 'bright-black'
+style = 'bold bright-black'
