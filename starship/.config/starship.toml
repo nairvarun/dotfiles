@@ -25,7 +25,7 @@ format = '([\($all_status$ahead_behind\)]($style)) '
 style = 'dimmed green'
 
 [git_state]
-format = '\([$state($progress_current/$progress_total)]($style)\) '
+format = '(\([$state($progress_current/$progress_total)]($style)\)) '
 style = 'dimmed green'
 
 [kubernetes]
