@@ -19,6 +19,7 @@ alias t="tmux"
 alias tf="terraform"
 alias d="docker"
 alias k="kubectl"
+alias h="helm"
 alias sc="source ~/.zshrc"
 
 # functions
@@ -203,6 +204,9 @@ compinit
 
 # kubectl completions
 source <(kubectl completion zsh)
+
+# helm completions
+source <(helm completion zsh)
 
 # minikube completions
 source <(minikube completion zsh)

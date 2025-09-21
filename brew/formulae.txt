@@ -5,15 +5,13 @@ tmux
 uv
 pipx
 nvm
-ollama
 neovim
-nginx
 awscli
 zoxide
 fzf
 ripgrep
-mysql
 hashicorp/tap/terraform
+kubernetes-cli
 helm
 derailed/k9s/k9s
 kubeseal
@@ -24,3 +22,4 @@ nmap
 kubectl-cnpg
 watch
 gcloud-cli
+argocd
