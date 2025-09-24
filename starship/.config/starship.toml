@@ -9,7 +9,6 @@ $python\
 $character"""
 
 [directory]
-# style = 'dimmed purple'
 style = 'bold bright-black'
 
 [character]
@@ -19,15 +18,15 @@ vimcmd_symbol = '[❮](bold bright-black)'
 
 [git_branch]
 format = '[$branch]($style) '
-style = 'bold dimmed green'
+style = 'bold dimmed purple'
 
 [git_status]
 format = '([\($all_status$ahead_behind\)]($style) )'
-style = 'bold dimmed green'
+style = 'bold dimmed purple'
 
 [git_state]
 format = '(\([$state($progress_current/$progress_total)]($style)\) )'
-style = 'bold dimmed green'
+style = 'bold dimmed purple'
 
 [kubernetes]
 format = '[$context]($style)( [\($namespace\)]($style)) '
