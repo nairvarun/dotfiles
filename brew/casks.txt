@@ -10,3 +10,4 @@ spotify
 steam
 visual-studio-code
 whatsapp
+windows-app
