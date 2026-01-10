@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -eu
+
+PATH=/opt/homebrew/bin:/usr/bin:/usr/local/bin:/bin
+
+kubectl completion zsh > ~/.zsh/completions/_kubectl
+docker completion zsh  > ~/.zsh/completions/_docker
+helm completion zsh    > ~/.zsh/completions/_helm
+minikube completion zsh > ~/.zsh/completions/_minikube
