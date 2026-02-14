@@ -1,6 +1,7 @@
 [user]
 	email = nairvarun104@gmail.com
 	name = Varun Nair
+
 [alias]
 	cl	= !git-cl
 	s 	= status -sb
@@ -12,19 +13,34 @@
 	bb	= branch -a
 	ss 	= switch
 	l	= log --oneline
-	g	= log --graph
-	gg	= log --graph --all
+	g	= log --graph --all
 	sc	= sparse-checkout
 	st	= stash
 	stp	= stash pop
 	o	= !git remote get-url origin | xargs git-open
+
 [init]
 	defaultBranch = main
+
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    side-by-side = true
+    line-numbers = true
+
+[merge]
+    conflictStyle = zdiff3
+
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+
 [includeIf "gitdir:~/wrk/"]
   path = .gitconfig-hf
-
