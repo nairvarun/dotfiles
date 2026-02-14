@@ -2,66 +2,85 @@
 
 import subprocess
 import sys
-import os
 
-def git_clone(repository_url, account="nv"):
-    try:
-        # validate account
-        valid_accounts = {"nv", "hf"}
-        if account not in valid_accounts:
-            print(f"invalid account: {account}")
+
+VALID_ACCOUNTS = {"nv", "hf"}
+DEFAULT_ACCOUNT = "nv"
+
+
+def is_https_url(url: str) -> bool:
+    return url.startswith("https://") or url.startswith("http://")
+
+
+def inject_account_into_ssh_url(url: str, account: str) -> str:
+    """
+    Transform git SSH URL to use a specific SSH config host alias.
+    e.g. git@github.com:org/repo.git -> git@github.com-nv:org/repo.git
+    """
+    if ":" not in url:
+        raise ValueError(f"Invalid SSH URL (missing ':'): {url}")
+
+    host, path = url.split(":", 1)
+    return f"{host}-{account}:{path}"
+
+
+def git_clone(repository_url: str, account: str = DEFAULT_ACCOUNT, clone_path: str | None = None) -> int:
+    if is_https_url(repository_url):
+        modified_url = repository_url
+    else:
+        if account not in VALID_ACCOUNTS:
+            print(f"Error: invalid account '{account}'. Must be one of: {VALID_ACCOUNTS}")
+            return 1
+        try:
+            modified_url = inject_account_into_ssh_url(repository_url, account)
+        except ValueError as e:
+            print(f"Error: {e}")
             return 1
 
-        # Build the command
-        repository_url = f"-{account}:".join(repository_url.split(':'))
-        command = ['git', 'clone', repository_url]
-        
-        # Execute git clone command
-        result = subprocess.run(
-            command,
-            capture_output=True,
-            text=True,
-            check=False
-        )
-        
-        if result.stdout:
-            print(result.stdout)
+    command = ["git", "clone", modified_url]
+    if clone_path:
+        command.append(clone_path)
 
-        if result.stderr:
-            print(result.stderr)
+    print(f"Running: {' '.join(command)}")
 
-        return result.returncode
-    
-    except Exception as e:
-        return 1
+    result = subprocess.run(command, capture_output=True, text=True)
+
+    if result.stdout:
+        print(result.stdout, end="")
+    if result.stderr:
+        print(result.stderr, end="", file=sys.stderr)
+
+    return result.returncode
 
 
-def main():
-    try:
-        args = sys.argv
-        assert len(args) >= 1, "atleast 1 arg required"
+def main() -> int:
+    args = sys.argv
 
-        # clone repo
-        match args:
-            case [_]:
-                print(f"Invalid number of args: {len(args)}")
-                print("Usage: $SCRIPT$ [account] (repository_url)")
-                return 1
-            case [_, url]:
-                git_clone(url)
-            case [_, acc, url]:
-                git_clone(url, acc)
-            case _:
-                print(f"Invalid number of args: {len(args)}")
-                print("Usage: $SCRIPT$ [account] (repository_url)")
-                return 1
+    match args:
+        # g cl <url>
+        case [_, url]:
+            return git_clone(url)
 
-        return 0
+        # g cl <https-url> <path>
+        # g cl <nv/hf> <ssh-url>
+        case [_, url, second] if is_https_url(url):
+            return git_clone(url, clone_path=second)
+        case [_, acc, url] if acc in VALID_ACCOUNTS:
+            return git_clone(url, acc)
 
-    except Exception as e:
-        print(e)
-        return 1
+        # g cl <nv/hf> <ssh-url> <path>
+        case [_, acc, url, clone_path] if acc in VALID_ACCOUNTS:
+            return git_clone(url, acc, clone_path)
+
+        case _:
+            print("Error: invalid arguments.")
+            print(f"Usage:")
+            print(f"  {args[0]} <https-url> [clone_path]")
+            print(f"  {args[0]} <ssh-url>")
+            print(f"  {args[0]} <nv|hf> <ssh-url> [clone_path]")
+            return 1
+
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
 
