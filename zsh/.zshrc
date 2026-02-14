@@ -1,13 +1,10 @@
 #### ZSH Settings
-# Enable case-insensitive tab completion
-autoload -Uz compinit && compinit
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-
 # vim mode
 bindkey -v
 bindkey "^R" history-incremental-search-backward
 
 #### Aliases 
+alias sc='source ~/.zshrc'
 alias g="git"
 alias p="python3"
 alias venv="source ./.venv/bin/activate"
@@ -16,7 +13,9 @@ alias tf="terraform"
 alias d="docker"
 alias k="kubectl"
 alias h="helm"
-alias sc="source ~/.zshrc"
+alias kc="kubectl config use-context"
+alias kn="kubectl config set-context --current --namespace"
+alias lazygit='lazygit --use-config-file="/Users/nv/Library/Application Support/lazygit/config.yml,/Users/nv/Library/Application Support/lazygit/green.yml"'
 
 #### Functions
 # mkdir and then cd into it
@@ -36,6 +35,9 @@ fpath=(
 )
 autoload -Uz compinit
 compinit -C -i -d ~/.zcompdump
+
+# Enable case-insensitive tab completion
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 # # gcloud
 # source '/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc'
