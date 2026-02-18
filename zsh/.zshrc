@@ -35,6 +35,7 @@ fpath=(
   $fpath
   ~/.zsh/completions 
   /Users/nv/.docker/completions 
+  /opt/homebrew/share/zsh/site-functions/
 )
 autoload -Uz compinit
 compinit -C -i -d ~/.zcompdump
