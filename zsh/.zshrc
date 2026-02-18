@@ -23,6 +23,9 @@ mkcd() {
   mkdir -p -- "$1" && cd -- "$1"
 }
 
+#### EDITOR
+EDITOR=/usr/bin/vim
+
 #### PATH
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
