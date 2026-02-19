@@ -56,5 +56,6 @@ keybind = alt+l=goto_split:right
 # split visuals
 unfocused-split-opacity = 0.2
 
-# keyunbinds
+# keybinds
+macos-option-as-alt=left
 keybind = super+enter=unbind
