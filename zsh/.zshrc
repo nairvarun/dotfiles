@@ -55,6 +55,7 @@ eval "$(starship init zsh)"
 # zoxide
 eval "$(zoxide init zsh)"
 
+### Lazy-load completions
 # nvm
 export NVM_DIR="$HOME/.nvm"
 
@@ -85,3 +86,12 @@ npx() {
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
   npx "$@"
 }
+
+# terraform
+terraform() {
+  unset -f terraform
+  autoload -U +X bashcompinit && bashcompinit  # Enable bash-style completions
+  complete -o nospace -C /opt/homebrew/bin/terraform terraform  # Load terraform completions
+  command terraform "$@"
+}
+
