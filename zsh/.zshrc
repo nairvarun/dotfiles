@@ -29,7 +29,6 @@ EDITOR=/usr/bin/vim
 #### PATH
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
-export PATH="$PATH:$(gcloud info --format='value(installation.sdk_root)')/bin"
 
 #### Completions
 fpath=(
@@ -43,10 +42,6 @@ compinit -C -i -d ~/.zcompdump
 
 # Enable case-insensitive tab completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-
-# # gcloud
-# source '/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc'
-# source '/opt/homebrew/share/google-cloud-sdk/path.zsh.inc'
 
 #### Software
 # starship
@@ -95,3 +90,10 @@ terraform() {
   command terraform "$@"
 }
 
+# gcloud
+gcloud() {
+  unset -f gcloud
+  export PATH="$PATH:$(gcloud info --format='value(installation.sdk_root)')/bin"
+  source '/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc'
+  source '/opt/homebrew/share/google-cloud-sdk/path.zsh.inc'
+}
