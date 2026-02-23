@@ -28,7 +28,7 @@ EDITOR=/usr/bin/vim
 
 #### PATH
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
 
 #### Completions
 fpath=(
