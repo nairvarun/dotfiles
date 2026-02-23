@@ -43,9 +43,19 @@
 # resize-overlay-duration = 4s 200ms
 
 # theme and font
+macos-titlebar-style = tabs
 theme = Catppuccin Mocha
+background-opacity = 0.75
+background-blur = true
 font-family = "Hack Nerd Font"
 font-size = 14
+
+# quick terminal settings
+quick-terminal-screen = mouse
+quick-terminal-animation-duration = 0
+
+# disable dock bounce and notification badge
+bell-features = no-attention
 
 # navigate splits
 keybind = alt+k=goto_split:up
@@ -54,8 +64,10 @@ keybind = alt+h=goto_split:left
 keybind = alt+l=goto_split:right
 
 # split visuals
-unfocused-split-opacity = 0.2
+unfocused-split-opacity = 1
 
 # keybinds
 macos-option-as-alt=left
 keybind = super+enter=unbind
+keybind = global:cmd+backquote=toggle_quick_terminal
+
