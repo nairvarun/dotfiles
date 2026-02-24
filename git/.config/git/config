@@ -7,7 +7,7 @@
 	s 	= status -sb
 	a 	= add
 	aa 	= add .
-	c 	= commit -m 
+	c 	= commit -m
 	cc 	= commit -m '.'
 	b	= branch
 	bb	= branch -a
@@ -31,4 +31,4 @@
 	clean = git-lfs clean -- %f
 
 [includeIf "gitdir:~/wrk/"]
-  path = .gitconfig-hf
+  path = ~/.config/git/config-hf
