@@ -3,6 +3,7 @@ $directory\
 $git_branch\
 $git_status\
 $git_state\
+$aws\
 $kubernetes\
 $line_break\
 $python\
@@ -37,6 +38,11 @@ contexts = [
   { context_pattern = "arn:aws:eks:ap-south-1:211125627791:cluster/ubi_dev_cluster", context_alias = "ubi-dev"},
 ]
 
+[aws]
+format = '[$profile]($style) '
+style = 'bold dimmed yellow'
+
 [python]
 format = '([$virtualenv]($style) )'
 style = 'bold bright-black'
+
