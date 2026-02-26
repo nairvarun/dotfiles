@@ -23,6 +23,23 @@ mkcd() {
   mkdir -p -- "$1" && cd -- "$1"
 }
 
+awsp() {
+  local profile
+  profile=$(cat <(grep '^\[' ~/.aws/config | tr -d '[]' | sed 's/^profile //') \
+                <(grep '^\[' ~/.aws/credentials | tr -d '[]') \
+            | sort -u | grep -v '^default$' | fzf --prompt="AWS Profile: " --height=~10)
+  if [ -n "$profile" ]; then
+    export AWS_PROFILE=$profile
+    echo "➜ AWS_PROFILE=$AWS_PROFILE"
+    if aws sts get-caller-identity &>/dev/null; then
+      echo "✓ session active"
+    else
+      echo "✗ session expired — logging in..."
+      aws sso login
+    fi
+  fi
+}
+
 #### EDITOR
 EDITOR=/usr/bin/vim
 
