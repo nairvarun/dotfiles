@@ -53,6 +53,7 @@ font-size = 14
 # quick terminal settings
 quick-terminal-screen = mouse
 quick-terminal-animation-duration = 0
+quick-terminal-size = 100%
 
 # disable dock bounce and notification badge
 bell-features = no-attention
