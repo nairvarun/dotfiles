@@ -3,7 +3,7 @@
 	name = Varun Nair
 
 [alias]
-	cl	= !git-cl
+	cl      = "!f() { if [[ \"$(pwd)\" == $HOME/wrk/* ]]; then git clone --config core.sshCommand='ssh -i ~/.ssh/hf/github/hyperface-github' \"$@\"; else git clone \"$@\"; fi; }; f"
 	s 	= status -sb
 	a 	= add
 	aa 	= add .
@@ -17,7 +17,7 @@
 	sc	= sparse-checkout
 	st	= stash
 	stp	= stash pop
-	o	= !git remote get-url origin | xargs git-open
+	o	= !git remote get-url origin | xargs _git-open
 	po	= !git push -u origin $(git branch --show-current)
 
 [init]
