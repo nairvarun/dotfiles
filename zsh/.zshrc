@@ -135,4 +135,14 @@ gcloud() {
   export PATH="$PATH:$(gcloud info --format='value(installation.sdk_root)')/bin"
   source '/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc'
   source '/opt/homebrew/share/google-cloud-sdk/path.zsh.inc'
+  gcloud "$@"
 }
+
+# sdkman
+sdk() {
+  unset -f sdk
+  export SDKMAN_DIR="$HOME/.sdkman"
+  [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+  sdk "$@"
+}
+
