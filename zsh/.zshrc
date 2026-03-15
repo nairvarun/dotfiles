@@ -19,6 +19,7 @@ alias kc="kubectl config use-context"
 alias kn="kubectl config set-context --current --namespace"
 
 #### API keys
+# security add-generic-password -a "$USER" -s "OPENROUTER_API_KEY" -w "xxxx"
 export OPENROUTER_API_KEY=$(security find-generic-password -a "$USER" -s "OPENROUTER_API_KEY" -w)
 
 api() {
