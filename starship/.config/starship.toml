@@ -41,6 +41,7 @@ contexts = [
 [aws]
 format = '[$profile]($style) '
 style = 'bold dimmed yellow'
+force_display = true
 
 [python]
 format = '([$virtualenv]($style) )'

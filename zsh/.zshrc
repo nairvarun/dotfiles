@@ -79,19 +79,7 @@ mkcd() {
 
 awsp() {
   local profile
-  profile=$(cat <(grep '^\[' ~/.aws/config | tr -d '[]' | sed 's/^profile //' | grep -v '^sso-session') \
-                <(grep '^\[' ~/.aws/credentials | tr -d '[]') \
-            | sort -u | fzf --prompt="AWS Profile: " --height=~10 --no-preview)
-  if [ -n "$profile" ]; then
-    export AWS_PROFILE=$profile
-    echo "➜ AWS_PROFILE=$AWS_PROFILE"
-    if aws sts get-caller-identity &>/dev/null; then
-      echo "✓ session active"
-    else
-      echo "✗ session expired — logging in..."
-      aws sso login
-    fi
-  fi
+  profile=$(command awsp) && export AWS_PROFILE=$(echo $profile | tail -1) || unset AWS_PROFILE
 }
 
 #### EDITOR

@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+# awsp - AWS profile switcher
+# Prints the selected profile name to stdout on success
+# Exits non-zero on failure
+
+set -euo pipefail
+
+# ── helpers ──────────────────────────────────────────────────────────────────
+
+get_profiles() {
+  cat \
+    <(grep '^\[' ~/.aws/config | tr -d '[]' | sed 's/^profile //' | grep -v '^sso-session') \
+    <(grep '^\[' ~/.aws/credentials | tr -d '[]') \
+    | sort -u
+}
+
+get_config_value() {
+  local profile=$1 key=$2
+  awk "/^\[profile ${profile}\]/{found=1; next} found && /^\[/{found=0} found && /^${key}[[:space:]]*=/{print; exit}" ~/.aws/config \
+    | sed "s/^${key}[[:space:]]*=[[:space:]]*//"
+}
+
+resolve_source_profile() {
+  local profile=$1
+  local source
+  source=$(get_config_value "$profile" "source_profile")
+  if [ -n "$source" ]; then
+    echo "$source"
+  else
+    echo "$profile"
+  fi
+}
+
+login_profile() {
+  local profile=$1
+  if get_config_value "$profile" "login_session" | grep -q '.'; then
+    echo "⏳ logging in via aws login..." >&2
+    AWS_PROFILE=$profile aws login
+  else
+    echo "⏳ logging in via aws sso login..." >&2
+    AWS_PROFILE=$profile aws sso login
+  fi
+}
+
+# ── main ─────────────────────────────────────────────────────────────────────
+
+selected=$(get_profiles | fzf --prompt="AWS Profile: " --height=~10 --no-preview)
+
+[ -z "$selected" ] && exit 1
+
+echo "➜ AWS_PROFILE=$selected" >&2
+
+# if selected profile is a role, resolve and login via source profile
+source=$(resolve_source_profile "$selected")
+
+if [ "$source" != "$selected" ]; then
+  echo "↪ role profile — authenticating via source: $source" >&2
+  login_target=$source
+else
+  login_target=$selected
+fi
+
+# check if source profile session is active
+if AWS_PROFILE=$login_target aws sts get-caller-identity &>/dev/null; then
+  echo "✓ session active" >&2
+else
+  login_profile "$login_target"
+  if ! AWS_PROFILE=$login_target aws sts get-caller-identity &>/dev/null; then
+    echo "✗ login failed" >&2
+    exit 1
+  fi
+  echo "✓ session active" >&2
+fi
+
+# print selected profile to stdout (caller uses this to export)
+echo "$selected"
+
