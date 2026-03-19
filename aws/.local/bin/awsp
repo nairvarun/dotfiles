@@ -74,4 +74,3 @@ fi
 
 # print selected profile to stdout (caller uses this to export)
 echo "$selected"
-
