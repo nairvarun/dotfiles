@@ -58,15 +58,6 @@ quick-terminal-size = 100%
 # disable dock bounce and notification badge
 bell-features = no-attention
 
-# navigate splits
-keybind = alt+k=goto_split:up
-keybind = alt+j=goto_split:down
-keybind = alt+h=goto_split:left
-keybind = alt+l=goto_split:right
-
-# split visuals
-unfocused-split-opacity = 1
-
 # keybinds
 macos-option-as-alt=left
 keybind = super+enter=unbind

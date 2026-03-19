@@ -29,6 +29,9 @@ api() {
         | jq '.data | {usage, limit, limit_remaining}'
 }
 
+#### pi
+alias pinit='container run -it --rm -v ~/.pi:/root/.pi -v ~/.aws/agent-credentials:/root/.aws/credentials:ro -v $(pwd):/workspace docker.io/nairvarun/pi:latest'
+
 #### fabric
 alias q='noglob _q_ask_me'
 alias q!='noglob _q_web_search'
