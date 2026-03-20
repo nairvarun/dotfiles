@@ -61,4 +61,6 @@ bell-features = no-attention
 # keybinds
 macos-option-as-alt=left
 keybind = super+enter=unbind
-keybind = global:cmd+backquote=toggle_quick_terminal
+keybind = global:opt+backquote=toggle_quick_terminal
+keybind = opt+shift+o=toggle_background_opacity
+
