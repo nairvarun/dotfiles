@@ -85,6 +85,25 @@ awsp() {
   profile=$(command awsp) && export AWS_PROFILE=$(echo $profile | tail -1) || unset AWS_PROFILE
 }
 
+itsherotime() {
+  if [ $# -eq 0 ]; then
+    # Select a random png from the directory
+    local random_file=$(ls ~/dev/private-mono/dev/ben10/sprites/*/*.png 2>/dev/null | sort -R | head -n 1)
+    if [ -n "$random_file" ]; then
+      set -- "$random_file"
+    fi
+  fi
+
+  # Save terminal state, run viu, drain response
+  local old=$(stty -g)
+  stty -echo
+  viu --height 10 "$@"
+  # sleep 0.15
+  # Flush pending input
+  while read -s -t 0 -k 1; do : ; done
+  stty "$old"
+}
+
 #### EDITOR
 EDITOR=/usr/bin/vim
 
@@ -205,3 +224,5 @@ safari() {
     open -a Safari "https://www.google.com/search?q=$query"
 }
 
+# Run itsherotime on shell startup
+itsherotime
