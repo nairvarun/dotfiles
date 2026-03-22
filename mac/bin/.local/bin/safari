@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Read from arguments or stdin
+if [ $# -gt 0 ]; then
+    query="$*"
+else
+    # Check if stdin has data
+    if [ ! -t 0 ]; then
+        query=$(cat)
+    else
+        echo "Usage: safari <search query>" >&2
+        echo "       echo 'query' | safari" >&2
+        exit 1
+    fi
+fi
+
+# URL encode spaces and open in Safari
+encoded=$(echo "$query" | sed 's/ /+/g')
+open -a Safari "https://www.google.com/search?q=$encoded"
