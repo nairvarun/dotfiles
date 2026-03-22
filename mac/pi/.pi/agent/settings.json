@@ -1,7 +1,7 @@
 {
-  "lastChangelogVersion": "0.60.0",
+  "lastChangelogVersion": "0.61.1",
   "defaultProvider": "openrouter",
-  "defaultModel": "z-ai/glm-4.7-flash",
+  "defaultModel": "qwen/qwen-plus",
   "quietStartup": true,
   "theme": "catppuccin-mocha",
   "defaultThinkingLevel": "medium"
