@@ -1,0 +1,4 @@
+awsp() {
+  local profile
+  profile=$(command awsp) && export AWS_PROFILE=$(echo $profile | tail -1) || unset AWS_PROFILE
+}
