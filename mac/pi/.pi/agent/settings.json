@@ -1,7 +1,7 @@
 {
   "lastChangelogVersion": "0.61.1",
   "defaultProvider": "openrouter",
-  "defaultModel": "qwen/qwen-plus",
+  "defaultModel": "moonshotai/kimi-k2",
   "quietStartup": true,
   "theme": "catppuccin-mocha",
   "defaultThinkingLevel": "medium"
