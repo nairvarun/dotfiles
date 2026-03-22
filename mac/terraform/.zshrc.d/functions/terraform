@@ -1,0 +1,6 @@
+terraform() {
+  unset -f terraform
+  autoload -U +X bashcompinit && bashcompinit  # Enable bash-style completions
+  complete -o nospace -C /opt/homebrew/bin/terraform terraform  # Load terraform completions
+  command terraform "$@"
+}
