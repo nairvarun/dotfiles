@@ -9,7 +9,7 @@ export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 #---EDITOR------------------------------------------------------
-EDITOR=/usr/bin/vim
+EDITOR=/opt/homebrew/bin/nvim
 
 #---Completions-------------------------------------------------
 fpath=(
@@ -48,3 +48,4 @@ for file in /Users/nv/.zshrc.d/init/*; do
     source "$file"
   fi
 done
+
