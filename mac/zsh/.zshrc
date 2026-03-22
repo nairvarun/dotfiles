@@ -1,118 +1,17 @@
-#### ZSH Settings
+#---ZSH Settings------------------------------------------------
 # vim mode
 bindkey -v
 bindkey "^R" history-incremental-search-backward
 
-#### Aliases 
-alias sc='source ~/.zshrc'
-alias scomp='rm ~/.zcompdump'
-alias g="git"
-alias lazygit='lazygit --use-config-file="/Users/nv/Library/Application Support/lazygit/config.yml,/Users/nv/Library/Application Support/lazygit/green.yml"'
-alias p="python3"
-alias venv="source ./.venv/bin/activate"
-alias t="tmux"
-alias tf="terraform"
-alias d="docker"
-alias k="kubectl"
-alias h="helm"
-alias kc="kubectl config use-context"
-alias kn="kubectl config set-context --current --namespace"
-
-#### API keys
-# security add-generic-password -a "$USER" -s "OPENROUTER_API_KEY" -w "xxxx"
-export OPENROUTER_API_KEY=$(security find-generic-password -a "$USER" -s "OPENROUTER_API_KEY" -w)
-
-api() {
-    echo "=== OpenRouter ==="
-    curl -s https://openrouter.ai/api/v1/key \
-        -H "Authorization: Bearer $(security find-generic-password -a "$USER" -s "OPENROUTER_API_KEY" -w)" \
-        | jq '.data | {usage, limit, limit_remaining}'
-}
-
-#### pi
-alias pinit='container run -it --rm -v ~/.pi:/root/.pi -v ~/.aws/agent-credentials:/root/.aws/credentials:ro -v $(pwd):/workspace docker.io/nairvarun/pi:latest'
-
-#### fabric
-alias q='noglob _q_ask_me'
-alias q!='noglob _q_web_search'
-
-_q_ask_me() {
-    setopt local_options no_monitor
-    local tmpfile=$(mktemp)
-    fabric-ai --pattern q <<< "$*" > "$tmpfile" 2>/dev/null &
-    local pid=$!
-
-    local spinner='⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
-    local i=0
-    while kill -0 $pid 2>/dev/null; do
-        printf '\r%s thinking...' "${spinner:$i:1}"
-        i=$(( (i+1) % 10 ))
-        sleep 0.1
-    done
-    printf '\r\033[K'
-
-    cat "$tmpfile" | glow
-    rm "$tmpfile"
-}
-
-_q_web_search() {
-    setopt local_options no_monitor
-    local tmpfile=$(mktemp)
-    fabric-ai --pattern q --model openai/gpt-4o-search-preview <<< "$*" > "$tmpfile" 2>/dev/null &
-    local pid=$!
-
-    local spinner='⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
-    local i=0
-    while kill -0 $pid 2>/dev/null; do
-        printf '\r%s searching...' "${spinner:$i:1}"
-        i=$(( (i+1) % 10 ))
-        sleep 0.1
-    done
-    printf '\r\033[K'
-
-    cat "$tmpfile" | glow
-    rm "$tmpfile"
-}
-
-#### Functions
-# mkdir and then cd into it
-mkcd() {
-  mkdir -p -- "$1" && cd -- "$1"
-}
-
-awsp() {
-  local profile
-  profile=$(command awsp) && export AWS_PROFILE=$(echo $profile | tail -1) || unset AWS_PROFILE
-}
-
-itsherotime() {
-  if [ $# -eq 0 ]; then
-    # Select a random png from the directory
-    local random_file=$(ls ~/dev/private-mono/dev/ben10/sprites/*/*.png 2>/dev/null | sort -R | head -n 1)
-    if [ -n "$random_file" ]; then
-      set -- "$random_file"
-    fi
-  fi
-
-  # Save terminal state, run viu, drain response
-  local old=$(stty -g)
-  stty -echo
-  viu --height 10 "$@"
-  # sleep 0.15
-  # Flush pending input
-  while read -s -t 0 -k 1; do : ; done
-  stty "$old"
-}
-
-#### EDITOR
-EDITOR=/usr/bin/vim
-
-#### PATH
+#---PATH--------------------------------------------------------
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
-#### Completions
+#---EDITOR------------------------------------------------------
+EDITOR=/usr/bin/vim
+
+#---Completions-------------------------------------------------
 fpath=(
   $fpath
   ~/.zsh/completions 
@@ -125,104 +24,27 @@ compinit -C -i -d ~/.zcompdump
 # Enable case-insensitive tab completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
-#### Software
-# starship
-eval "$(starship init zsh)"
+#---API keys----------------------------------------------------
+# security add-generic-password -a "$USER" -s "OPENROUTER_API_KEY" -w "xxxx"
+export OPENROUTER_API_KEY=$(security find-generic-password -a "$USER" -s "OPENROUTER_API_KEY" -w)
 
-# zoxide
-eval "$(zoxide init zsh)"
+#---Functions---------------------------------------------------
+for file in /Users/nv/.zshrc.d/functions/*; do
+  if [[ -f "$file" ]]; then
+    source "$file"
+  fi
+done
 
-# fzf
-# theme and keybinding
-export FZF_DEFAULT_OPTS=" \
---color=bg+:#313244,bg:-1,spinner:#F5E0DC,hl:#F38BA8 \
---color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
---color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
---color=selected-bg:#45475A \
---color=border:#6C7086,label:#CDD6F4 \
---bind=alt-k:up,alt-j:down,alt-K:preview-page-up,alt-J:preview-page-down \
---preview '[ -d {} ] && tree -aCL 1 {} || bat --color=always {}' \
---tmux \
---multi"
+#---Aliases-----------------------------------------------------
+for file in /Users/nv/.zshrc.d/alias/*; do
+  if [[ -f "$file" ]]; then
+    source "$file"
+  fi
+done
 
-# ignore .git, .venv, node_modules
-export FZF_DEFAULT_COMMAND="find \( \
-    -name '.venv' -o \
-    -name '.git' -o \
-    -name 'node_modules' \
-\) -prune -o -print"
-
-# export FZF_COMPLETION_TRIGGER=','
-
-### Lazy-load completions
-# nvm
-export NVM_DIR="$HOME/.nvm"
-
-nvm() {
-  unset -f nvm node npm npx pi
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-  nvm "$@"
-}
-
-node() {
-  unset -f nvm node npm npx pi
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-  node "$@"
-}
-
-npm() {
-  unset -f nvm node npm npx pi
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-  npm "$@"
-}
-
-npx() {
-  unset -f nvm node npm npx pi
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-  npx "$@"
-}
-
-pi() {
-  unset -f nvm node npm npx pi
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-  pi "$@"
-}
-
-# terraform
-terraform() {
-  unset -f terraform
-  autoload -U +X bashcompinit && bashcompinit  # Enable bash-style completions
-  complete -o nospace -C /opt/homebrew/bin/terraform terraform  # Load terraform completions
-  command terraform "$@"
-}
-
-# gcloud
-gcloud() {
-  unset -f gcloud
-  export PATH="$PATH:$(gcloud info --format='value(installation.sdk_root)')/bin"
-  source '/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc'
-  source '/opt/homebrew/share/google-cloud-sdk/path.zsh.inc'
-  gcloud "$@"
-}
-
-# sdkman
-sdk() {
-  unset -f sdk
-  export SDKMAN_DIR="$HOME/.sdkman"
-  [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-  sdk "$@"
-}
-
-# safari
-safari() {
-    local query=$(echo "$*" | sed 's/ /+/g')
-    open -a Safari "https://www.google.com/search?q=$query"
-}
-
-# Run itsherotime on shell startup
-itsherotime
+#---Init Software-----------------------------------------------
+for file in /Users/nv/.zshrc.d/init/*; do
+  if [[ -f "$file" ]]; then
+    source "$file"
+  fi
+done

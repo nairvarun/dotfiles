@@ -1,0 +1,6 @@
+api() {
+    echo "=== OpenRouter ==="
+    curl -s https://openrouter.ai/api/v1/key \
+        -H "Authorization: Bearer $(security find-generic-password -a "$USER" -s "OPENROUTER_API_KEY" -w)" \
+        | jq '.data | {usage, limit, limit_remaining}'
+}

@@ -1,0 +1,16 @@
+alias sc='source ~/.zshrc'
+alias scomp='rm ~/.zshrc'
+alias g="git"
+alias lazygit='lazygit --use-config-file="/Users/nv/Library/Application Support/lazygit/config.yml,/Users/nv/Library/Application Support/lazygit/green.yml"'
+alias p="python3"
+alias venv="source ./.venv/bin/activate"
+alias t="tmux"
+alias tf="terraform"
+alias d="docker"
+alias k="kubectl"
+alias h="helm"
+alias kc="kubectl config use-context"
+alias kn="kubectl config set-context --current --namespace"
+alias pinit='container run -it --rm -v ~/.pi:/root/.pi -v ~/.aws/agent-credentials:/root/.aws/credentials:ro -v $(pwd):/workspace docker.io/nairvarun/pi:latest'
+alias q='noglob _q_ask_me'
+alias q!='noglob _q_web_search'
