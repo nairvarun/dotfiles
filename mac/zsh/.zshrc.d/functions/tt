@@ -1,4 +1,3 @@
-#!/bin/zsh
 tt() {
   if [[ -z "$1" ]]; then
     local d=$(mktemp -d /tmp/XXXXXX) && cd "$d"
@@ -8,4 +7,3 @@ tt() {
     mkdir "/tmp/$1" && cd "/tmp/$1"
   fi
 }
-tt "$@"
