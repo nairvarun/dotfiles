@@ -1,0 +1,4 @@
+alias k="kubectl"
+alias h="helm"
+alias kc="kubectl config use-context"
+alias kn="kubectl config set-context --current --namespace"

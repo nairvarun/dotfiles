@@ -1,0 +1,1 @@
+alias pinit='container run -it --rm -v ~/.pi:/root/.pi -v ~/.aws/agent-credentials:/root/.aws/credentials:ro -v $(pwd):/workspace docker.io/nairvarun/pi:latest'
