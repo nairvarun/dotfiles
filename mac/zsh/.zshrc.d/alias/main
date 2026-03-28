@@ -3,7 +3,6 @@ alias sc='source ~/.zshrc'
 alias scomp='rm ~/.zshrc'
 alias p="python3"
 alias venv="source ./.venv/bin/activate"
-alias t="tmux"
 alias d="docker"
 alias q='noglob _q_ask_me'
 alias q!='noglob _q_web_search'
