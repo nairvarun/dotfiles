@@ -1,8 +1,6 @@
 alias c="claude --dangerously-skip-permissions"
 alias sc='source ~/.zshrc'
 alias scomp='rm ~/.zshrc'
-alias g="git"
-alias lazygit='lazygit --use-config-file="/Users/nv/Library/Application Support/lazygit/config.yml,/Users/nv/Library/Application Support/lazygit/green.yml"'
 alias p="python3"
 alias venv="source ./.venv/bin/activate"
 alias t="tmux"
