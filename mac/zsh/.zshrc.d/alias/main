@@ -1,4 +1,4 @@
-alias c="claude --dangerously-skip-permissions"
+alias c="claude --enable-auto-mode --dangerously-skip-permissions"
 alias sc='source ~/.zshrc'
 alias scomp='rm ~/.zshrc'
 alias p="python3"
