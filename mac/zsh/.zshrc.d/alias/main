@@ -1,6 +1,6 @@
 alias c="claude --enable-auto-mode --dangerously-skip-permissions"
 alias sc='source ~/.zshrc'
-alias scomp='rm ~/.zshrc'
+alias scomp='rm -rf ~/.zcompcache/ ~/.zcompdump'
 alias p="python3"
 alias venv="source ./.venv/bin/activate"
 alias d="docker"
