@@ -63,4 +63,3 @@ macos-option-as-alt=left
 keybind = super+enter=unbind
 keybind = global:opt+backquote=toggle_quick_terminal
 keybind = opt+shift+o=toggle_background_opacity
-
