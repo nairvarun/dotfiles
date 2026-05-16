@@ -1,7 +1,7 @@
 {
-  "lastChangelogVersion": "0.64.0",
+  "lastChangelogVersion": "0.67.3",
   "defaultProvider": "openrouter",
-  "defaultModel": "minimax/minimax-m2.7",
+  "defaultModel": "z-ai/glm-5.1",
   "quietStartup": true,
   "theme": "catppuccin-mocha",
   "defaultThinkingLevel": "medium",
