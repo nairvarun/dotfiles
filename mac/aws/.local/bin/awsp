@@ -5,13 +5,23 @@
 
 set -euo pipefail
 
+CUSTOM_CREDS_FILE="${HOME}/.config/aws/credentials"
+CUSTOM_PREFIX="[read only] "
+SSO_PREFIX="[sso] "
+CREDS_PREFIX="[creds] "
+
 # ── helpers ──────────────────────────────────────────────────────────────────
 
 get_profiles() {
-  cat \
-    <(grep '^\[' ~/.aws/config | tr -d '[]' | sed 's/^profile //' | grep -v '^sso-session') \
-    <(grep '^\[' ~/.aws/credentials | tr -d '[]') \
-    | sort -u
+  grep '^\[' ~/.aws/config 2>/dev/null | tr -d '[]' | sed 's/^profile //' | grep -v '^sso-session' \
+    | sort -u | sed "s/^/${SSO_PREFIX}/"
+
+  grep '^\[' ~/.aws/credentials 2>/dev/null | tr -d '[]' \
+    | sort -u | sed "s/^/${CREDS_PREFIX}/"
+
+  if [ -f "$CUSTOM_CREDS_FILE" ]; then
+    grep '^\[' "$CUSTOM_CREDS_FILE" | tr -d '[]' | sort -u | sed "s/^/${CUSTOM_PREFIX}/"
+  fi
 }
 
 get_config_value() {
@@ -48,16 +58,33 @@ selected=$(get_profiles | fzf --prompt="AWS Profile: " --height=~10 --no-preview
 
 [ -z "$selected" ] && exit 1
 
-echo "➜ AWS_PROFILE=$selected" >&2
+# detect and strip prefix
+is_custom=false
+profile="$selected"
+if [[ "$selected" == "${CUSTOM_PREFIX}"* ]]; then
+  is_custom=true
+  profile="${selected:${#CUSTOM_PREFIX}}"
+elif [[ "$selected" == "${SSO_PREFIX}"* ]]; then
+  profile="${selected:${#SSO_PREFIX}}"
+elif [[ "$selected" == "${CREDS_PREFIX}"* ]]; then
+  profile="${selected:${#CREDS_PREFIX}}"
+fi
+
+echo "➜ AWS_PROFILE=$profile" >&2
+
+if $is_custom; then
+  echo "$profile"
+  exit 0
+fi
 
 # if selected profile is a role, resolve and login via source profile
-source=$(resolve_source_profile "$selected")
+source=$(resolve_source_profile "$profile")
 
-if [ "$source" != "$selected" ]; then
+if [ "$source" != "$profile" ]; then
   echo "↪ role profile — authenticating via source: $source" >&2
   login_target=$source
 else
-  login_target=$selected
+  login_target=$profile
 fi
 
 # check if source profile session is active
@@ -72,5 +99,4 @@ else
   echo "✓ session active" >&2
 fi
 
-# print selected profile to stdout (caller uses this to export)
-echo "$selected"
+echo "$profile"
