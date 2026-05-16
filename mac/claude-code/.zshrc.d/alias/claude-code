@@ -1,2 +1,3 @@
+alias c="claude --enable-auto-mode --dangerously-skip-permissions"
 alias ccusage="bunx ccusage"
 alias piusage="bunx @ccusage/pi@latest"

@@ -1,9 +1,0 @@
-{
-  "lastChangelogVersion": "0.67.3",
-  "defaultProvider": "openrouter",
-  "defaultModel": "z-ai/glm-5.1",
-  "quietStartup": true,
-  "theme": "catppuccin-mocha",
-  "defaultThinkingLevel": "medium",
-  "hideThinkingBlock": true
-}

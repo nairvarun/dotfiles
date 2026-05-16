@@ -1,10 +1,4 @@
-alias c="claude --enable-auto-mode --dangerously-skip-permissions"
-alias oc='AWS_CONFIG_FILE="$HOME/.config/aws/config" AWS_SHARED_CREDENTIALS_FILE="$HOME/.config/aws/credentials" opencode'
 alias sc='source ~/.zshrc'
 alias scomp='rm -rf ~/.zcompcache/ ~/.zcompdump'
-alias p="python3"
-alias venv="source ./.venv/bin/activate"
 alias d="docker"
-# alias q='noglob _q_ask_me'
-# alias q!='noglob _q_web_search'
 alias a='apfel --stream'

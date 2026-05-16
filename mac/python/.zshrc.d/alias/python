@@ -1,0 +1,2 @@
+alias p="python3"
+alias venv="source ./.venv/bin/activate"
