@@ -1,1 +1,1 @@
-export EDITOR=/usr/bin/vim
+export EDITOR=/opt/homebrew/bin/nvim
