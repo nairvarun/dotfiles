@@ -1,0 +1,212 @@
+#!/usr/bin/env bash
+# claude-search — fuzzy search across all Claude Code session messages
+# Deps: fzf 0.60+, glow, python3
+
+set -euo pipefail
+
+SESSIONS_DIR="${HOME}/.claude/projects"
+TMPDIR_SELF=$(mktemp -d)
+trap 'rm -rf "$TMPDIR_SELF"' EXIT
+
+PREVIEW_PY="$TMPDIR_SELF/preview.py"
+INDEX_FILE="$TMPDIR_SELF/index.tsv"
+
+# ── preview script ────────────────────────────────────────────────────────────
+cat > "$PREVIEW_PY" << 'PYEOF'
+#!/usr/bin/env python3
+import json, os, sys
+
+filepath, lineno = sys.argv[1], int(sys.argv[2])
+
+try:
+    with open(filepath) as fh:
+        for i, raw in enumerate(fh, 1):
+            if i == lineno:
+                obj = json.loads(raw)
+                break
+        else:
+            print(f"Line {lineno} not found"); sys.exit(1)
+
+    msg     = obj.get("message", {})
+    content = msg.get("content", "")
+    role    = msg.get("role", obj.get("type", "?"))
+    ts      = obj.get("timestamp", "")[:16].replace("T", " ")
+    cwd     = obj.get("cwd", "")
+    project = os.path.basename(cwd) if cwd else os.path.basename(os.path.dirname(filepath))
+
+    print(f"> **{'USER' if role == 'user' else 'ASSISTANT'}** · {ts} · {project}")
+    print(f"> `{cwd}`")
+    print()
+    print("---")
+    print()
+
+    if isinstance(content, str):
+        print(content)
+    elif isinstance(content, list):
+        for p in content:
+            if not isinstance(p, dict):
+                continue
+            t = p.get("type", "")
+            if t == "text":
+                text = p.get("text", "").strip()
+                if text:
+                    print(text)
+                    print()
+            elif t == "tool_use":
+                name = p.get("name", "?")
+                inp  = json.dumps(p.get("input", {}), indent=2)
+                print(f"**Tool:** `{name}`")
+                print(f"```json\n{inp[:800]}\n```")
+                print()
+            elif t == "tool_result":
+                rc = p.get("content", "")
+                if isinstance(rc, list):
+                    rc = "\n".join(x.get("text", "") for x in rc if isinstance(x, dict))
+                rc = str(rc).strip()
+                if rc:
+                    print(f"**Output:**\n```\n{rc[:600]}\n```")
+                    print()
+            # skip "thinking" blocks
+
+except Exception as e:
+    print(f"Error: {e}")
+    import traceback; traceback.print_exc()
+PYEOF
+chmod +x "$PREVIEW_PY"
+
+# ── build index ───────────────────────────────────────────────────────────────
+echo "Indexing sessions…" >&2
+
+python3 - "$SESSIONS_DIR" "$INDEX_FILE" << 'PYEOF'
+import json, os, glob, re, sys
+
+sessions_dir, out_path = sys.argv[1], sys.argv[2]
+
+JUNK_TAGS = {
+    "local-command-caveat", "bash-input", "bash-stdout", "command-name",
+    "local-command-stdout", "task-notification", "command-message",
+    "system-reminder", "antml:function_calls",
+}
+
+def is_junk(text):
+    if not text or len(text.strip()) < 5:
+        return True
+    m = re.match(r"^\s*<([A-Za-z][A-Za-z0-9_:-]*)", text)
+    return bool(m and m.group(1) in JUNK_TAGS)
+
+def extract_text(content):
+    if isinstance(content, str):
+        return content
+    if isinstance(content, list):
+        return " ".join(
+            p.get("text", "")
+            for p in content
+            if isinstance(p, dict) and p.get("type") == "text"
+        )
+    return ""
+
+def get_title(filepath):
+    ai_title = first_user = ""
+    try:
+        with open(filepath) as f:
+            for raw in f:
+                raw = raw.strip()
+                if not raw:
+                    continue
+                try:
+                    obj = json.loads(raw)
+                except Exception:
+                    continue
+                t = obj.get("type", "")
+                if t == "ai-title" and not ai_title:
+                    ai_title = obj.get("aiTitle", "").strip()
+                if t == "user" and not first_user:
+                    text = " ".join(extract_text(
+                        obj.get("message", {}).get("content", "")
+                    ).split())
+                    if not is_junk(text):
+                        first_user = text
+                if ai_title and first_user:
+                    break
+    except Exception:
+        pass
+    return ai_title or first_user or "<untitled>"
+
+count = 0
+seen_uuids = set()
+
+with open(out_path, "w") as out:
+    for filepath in sorted(glob.glob(f"{sessions_dir}/**/*.jsonl", recursive=True)):
+        title = get_title(filepath)
+        title_disp = (title[:52] + "…") if len(title) > 52 else title
+
+        try:
+            with open(filepath) as f:
+                for lineno, raw in enumerate(f, 1):
+                    raw = raw.strip()
+                    if not raw:
+                        continue
+                    try:
+                        obj = json.loads(raw)
+                    except Exception:
+                        continue
+                    if obj.get("type") not in ("user", "assistant"):
+                        continue
+
+                    uid = obj.get("uuid", "")
+                    if uid:
+                        if uid in seen_uuids:
+                            continue
+                        seen_uuids.add(uid)
+
+                    msg     = obj.get("message", {})
+                    role    = msg.get("role", "")
+                    content = msg.get("content", "")
+                    text    = " ".join(extract_text(content).split())
+
+                    if is_junk(text):
+                        continue
+
+                    cwd     = obj.get("cwd", "")
+                    project = os.path.basename(cwd) if cwd else os.path.basename(os.path.dirname(filepath))
+                    date    = obj.get("timestamp", "")[:10]
+
+                    # Field 1: visible display (date · project · title) + hidden full text for search
+                    # fzf shows field 1 truncated to terminal width, but searches the whole string.
+                    proj_disp  = project[:16].ljust(16)
+                    title_col  = title_disp.ljust(53)
+                    text_clean = text.replace("\t", " ")[:600]
+                    field1 = f"{date}  {proj_disp}  {title_col}  {text_clean}"
+
+                    # TSV: display+search \t filepath \t lineno \t cwd
+                    out.write(f"{field1}\t{filepath}\t{lineno}\t{cwd}\n")
+                    count += 1
+        except Exception:
+            pass
+
+print(f"{count} messages indexed", file=sys.stderr)
+PYEOF
+
+# ── launch fzf ────────────────────────────────────────────────────────────────
+query="${*:-}"
+
+selected=$(fzf \
+    --delimiter=$'\t' \
+    --with-nth=1 \
+    --nth=1 \
+    --layout=reverse \
+    --header="Claude sessions  [ctrl-y: copy · ctrl-o: open dir]" \
+    --query="$query" \
+    --preview="python3 '${PREVIEW_PY}' {2} {3} | glow -" \
+    --preview-window="right:55%:wrap" \
+    --bind="ctrl-y:execute-silent(python3 '${PREVIEW_PY}' {2} {3} | pbcopy)" \
+    --bind="ctrl-o:execute-silent(open {4})" \
+    --color="hl:yellow,hl+:bright-yellow" \
+    < "$INDEX_FILE" \
+    2>/dev/null || true)
+
+if [[ -n "$selected" ]]; then
+    filepath=$(printf '%s' "$selected" | cut -f2)
+    lineno=$(printf '%s' "$selected" | cut -f3)
+    echo "$filepath:$lineno"
+fi
