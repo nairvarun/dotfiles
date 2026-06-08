@@ -1,0 +1,3 @@
+alias lc="limactl"
+alias nc="lima nerdctl"
+

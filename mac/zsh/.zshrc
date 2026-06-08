@@ -49,3 +49,6 @@ for file in /Users/nv/.zshrc.d/init/*; do
   fi
 done
 
+
+# SignalsAI Tracker
+export PATH="/Users/nv/.signals/bin:$PATH"
