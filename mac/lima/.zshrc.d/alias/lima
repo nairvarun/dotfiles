@@ -1,3 +1,3 @@
 alias lc="limactl"
-alias nc="lima nerdctl"
+alias n="lima nerdctl"
 

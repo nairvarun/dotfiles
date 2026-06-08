@@ -1,0 +1,8 @@
+ci() {
+  AWS_PROFILE=hf-i aws ssm start-session --region ap-south-1 \
+    --target "$(AWS_PROFILE=hf-i aws ec2 describe-instances \
+      --region ap-south-1 \
+      --filters "Name=tag:Name,Values=hf-mgmt-k3s-arc" "Name=instance-state-name,Values=running" \
+      --query "Reservations[0].Instances[0].InstanceId" \
+      --output text)"
+}
