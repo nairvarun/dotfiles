@@ -1,0 +1,26 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.8"
+# dependencies = [
+#     "pyotp",
+# ]
+# ///
+
+import pyotp
+import os
+import subprocess
+
+SECRET = os.environ.get("HF_OVPN_OTP_SECRET")
+
+if not SECRET:
+    print("Error: HF_OVPN_OTP_SECRET environment variable not set")
+    exit(1)
+
+totp = pyotp.TOTP(SECRET)
+otp = totp.now()
+
+# Copy to clipboard using macOS pbcopy
+subprocess.run(["pbcopy"], input=otp, text=True)
+
+# # Also print it so you can see it
+# print(otp, end="")
