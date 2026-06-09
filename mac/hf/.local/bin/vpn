@@ -1,26 +1,10 @@
-#!/usr/bin/env -S uv run --script
-# /// script
-# requires-python = ">=3.8"
-# dependencies = [
-#     "pyotp",
-# ]
-# ///
+#!/bin/bash
 
-import pyotp
-import os
-import subprocess
+totp $HF_OVPN_OTP_SECRET | pbcopy
 
-SECRET = os.environ.get("HF_OVPN_OTP_SECRET")
+echo "✓ OTP copied to clipboard (Cmd+V to paste)"
+echo ""
 
-if not SECRET:
-    print("Error: HF_OVPN_OTP_SECRET environment variable not set")
-    exit(1)
+# Run VPN
+echo -e "nv\n" > /tmp/vpn.auth && chmod 600 /tmp/vpn.auth && sudo openvpn --config /Users/nv/Documents/hf/dev/hyperface-np-mgmt_VarunNair_hyperface-np-mgmt.ovpn --auth-user-pass /tmp/vpn.auth --auth-retry interact; rm -f /tmp/vpn.auth
 
-totp = pyotp.TOTP(SECRET)
-otp = totp.now()
-
-# Copy to clipboard using macOS pbcopy
-subprocess.run(["pbcopy"], input=otp, text=True)
-
-# # Also print it so you can see it
-# print(otp, end="")
