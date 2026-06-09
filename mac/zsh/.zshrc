@@ -15,7 +15,6 @@ EDITOR=/opt/homebrew/bin/nvim
 fpath=(
   $fpath
   ~/.zsh/completions 
-  /Users/nv/.docker/completions 
   /opt/homebrew/share/zsh/site-functions/
 )
 autoload -Uz compinit
