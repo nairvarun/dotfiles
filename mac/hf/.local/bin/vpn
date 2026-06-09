@@ -6,5 +6,11 @@ echo "✓ OTP copied to clipboard (Cmd+V to paste)"
 echo ""
 
 # Run VPN
-echo -e "nv\n" > /tmp/vpn.auth && chmod 600 /tmp/vpn.auth && sudo openvpn --config /Users/nv/Documents/hf/dev/hyperface-np-mgmt_VarunNair_hyperface-np-mgmt.ovpn --auth-user-pass /tmp/vpn.auth --auth-retry interact; rm -f /tmp/vpn.auth
+echo -e "nv\n" > /tmp/vpn.auth && \
+  chmod 600 /tmp/vpn.auth && \
+  sudo openvpn \
+  --config /Users/nv/Documents/hf/dev/hyperface-np-mgmt_VarunNair_hyperface-np-mgmt.ovpn \
+  --auth-user-pass /tmp/vpn.auth \
+  --auth-retry interact; \
+  rm -f /tmp/vpn.auth
 
