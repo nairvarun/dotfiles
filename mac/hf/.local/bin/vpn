@@ -1,16 +1,28 @@
-#!/bin/bash
+#!/usr/bin/expect
 
-totp $HF_OVPN_OTP_SECRET | pbcopy
+# Generate TOTP upfront
+set totp [exec totp $env(HF_OVPN_OTP_SECRET)]
+puts "✓ OTP ready"
 
-echo "✓ OTP copied to clipboard (Cmd+V to paste)"
-echo ""
+spawn sudo openvpn \
+    --config /Users/nv/Documents/hf/dev/hyperface-np-mgmt_VarunNair_hyperface-np-mgmt.ovpn \
+    --auth-user-pass \
+    --auth-retry interact
 
-# Run VPN
-echo -e "nv\n" > /tmp/vpn.auth && \
-  chmod 600 /tmp/vpn.auth && \
-  sudo openvpn \
-  --config /Users/nv/Documents/hf/dev/hyperface-np-mgmt_VarunNair_hyperface-np-mgmt.ovpn \
-  --auth-user-pass /tmp/vpn.auth \
-  --auth-retry interact; \
-  rm -f /tmp/vpn.auth
+expect "Password:"
+send "101010\r"
+# interact {
+#     "\r" { send "\r"; return }
+# }
+
+expect "Enter Auth Username:"
+send "nv\r"
+
+expect "Enter Auth Password:"
+send "\r"
+
+expect "CHALLENGE: Enter OTP Code"
+send "$totp\r"
+
+interact
 
