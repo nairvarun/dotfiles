@@ -1,0 +1,21 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.23",
+  "base_commit_sha": "6c50ecdbeeaba82463fd8a00fc0d491632228a76",
+  "prompts": {
+    "12bc2a81dd577d06": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "04e40804-05c2-43ff-a1ff-db29aa6420c6",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Varun Nair <nairvarun104@gmail.com>",
+      "messages": [],
+      "total_additions": 5,
+      "total_deletions": 12,
+      "accepted_lines": 5,
+      "overriden_lines": 0
+    }
+  }
+}
