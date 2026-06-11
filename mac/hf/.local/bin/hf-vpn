@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+TOTP_BIN="totp"
+PROFILE=~/Documents/hf/dev/hyperface-np-mgmt_VarunNair_hyperface-np-mgmt.ovpn
+
+if [[ -z "${HF_OVPN_OTP_SECRET:-}" ]]; then
+  echo "HF_OVPN_OTP_SECRET is not set" >&2
+  exit 1
+fi
+
+otp="$("$TOTP_BIN" "$HF_OVPN_OTP_SECRET")"
+
+creds=$(mktemp)
+trap 'rm -f "$creds"' EXIT
+
+printf 'nv\n%s\n' "$otp" > "$creds"
+
+exec sudo openvpn --config "$PROFILE" --auth-user-pass "$creds"
