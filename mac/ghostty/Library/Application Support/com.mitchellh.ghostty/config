@@ -64,3 +64,6 @@ keybind = super+enter=unbind
 keybind = global:opt+backquote=toggle_quick_terminal
 keybind = opt+shift+o=toggle_background_opacity
 split-divider-color = #45475a
+
+keybind = cmd+l>l>m=text:claude --enable-auto-mode --dangerously-skip-permissions\n
+
