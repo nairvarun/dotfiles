@@ -18,7 +18,7 @@
 	st	= stash
 	stp	= stash pop
 	o	= !git remote get-url origin | xargs _git-open
-	po	= !git push -u origin $(git branch --show-current)
+	pu	= !git push -u origin $(git branch --show-current)
 
 [init]
 	defaultBranch = main

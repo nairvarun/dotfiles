@@ -13,7 +13,7 @@ CREDS_PREFIX="[creds] "
 
 get_profiles() {
   grep '^\[' ~/.aws/config 2>/dev/null | tr -d '[]' | sed 's/^profile //' | grep -v '^sso-session' \
-    | sort -u | sed -e "s/^hf-/${RO_PREFIX}hf-/" -e t -e "s/^/${SSO_PREFIX}/"
+    | sort -u | sed "s/^/${SSO_PREFIX}/"
 
   grep '^\[' ~/.aws/credentials 2>/dev/null | tr -d '[]' \
     | sort -u | sed -e "s/^hf-/${RO_PREFIX}hf-/" -e t -e "s/^/${CREDS_PREFIX}/"
