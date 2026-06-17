@@ -1,0 +1,36 @@
+common/git/.config/git/config
+  c5d1a43ed51fe5ec 21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.23",
+  "base_commit_sha": "e52d4542424c6f9c4571aae3dddd59b67f57683b",
+  "prompts": {
+    "670e6dec3804d030": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b7b96586-2b46-4870-9693-bda41e8fbfe7",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Varun Nair <nairvarun104@gmail.com>",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    },
+    "c5d1a43ed51fe5ec": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4e50fb56-dcea-4ca9-81df-acd7cf117a42",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Varun Nair <nairvarun104@gmail.com>",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    }
+  }
+}
