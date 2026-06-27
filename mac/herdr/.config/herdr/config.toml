@@ -1,0 +1,36 @@
+[theme]
+name = "terminal"
+
+auto_switch = false
+[keys]
+# Use opt+z (alt+z) as the prefix instead of ctrl+b
+prefix = "alt+z"
+
+# Agent navigation
+previous_agent = "prefix+shift+a"
+next_agent = "prefix+a"
+focus_agent = "prefix+alt+1..9"
+
+# Split panes
+split_vertical = "prefix+m"           # vertical split (left/right)
+split_horizontal = "prefix+shift+m"    # horizontal split (top/bottom)
+
+# Git worktree helpers
+open_worktree = "prefix+shift+o"      # open existing worktree
+remove_worktree = "prefix+shift+x"    # remove a worktree
+
+[ui]
+# Remove gaps between split panes for a tighter layout
+pane_gaps = false
+
+# Show agent names on pane borders
+show_agent_labels_on_pane_borders = true
+
+# Create tabs immediately without asking for a name
+prompt_new_tab_name = false
+
+[worktrees]
+directory = "~/.herdr/worktrees"
+
+[ui.toast]
+delivery = "herdr"
