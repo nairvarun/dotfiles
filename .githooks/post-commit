@@ -1,0 +1,9 @@
+#!/bin/bash
+# Post-commit hook: auto-push to origin when on main branch.
+
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+if [ "$BRANCH" = "main" ]; then
+    echo "post-commit: pushing main to origin..."
+    git push origin main
+fi
