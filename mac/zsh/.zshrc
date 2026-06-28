@@ -24,10 +24,8 @@ compinit -C -i -d ~/.zcompdump
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 #---API keys----------------------------------------------------
-# security add-generic-password -a "$USER" -s "OPENROUTER_API_KEY" -w "xxxx"
-# export OPENROUTER_API_KEY=$(security find-generic-password -a "$USER" -s "OPENROUTER_API_KEY" -w)
-export OPENCODE_API_KEY=$(security find-generic-password -a "$USER" -s "OPENCODE_API_KEY" -w)
-export HF_OVPN_OTP_SECRET=$(security find-generic-password -a "$USER" -s "HF_OVPN_OTP_SECRET" -w)
+# Load secrets from age-encrypted dotenv file
+eval "$(age -d -i ~/.ssh/nv/nv ~/.env.age 2>/dev/null)"
 
 #---Functions---------------------------------------------------
 for file in /Users/nv/.zshrc.d/functions/*; do
