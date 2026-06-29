@@ -1,9 +1,7 @@
 [theme]
 name = "terminal"
 
-auto_switch = false
 [keys]
-# Use opt+z (alt+z) as the prefix instead of ctrl+b
 prefix = "alt+z"
 
 # Agent navigation
@@ -20,14 +18,10 @@ open_worktree = "prefix+shift+o"      # open existing worktree
 remove_worktree = "prefix+shift+x"    # remove a worktree
 
 [ui]
-# Remove gaps between split panes for a tighter layout
-pane_gaps = false
-
-# Show agent names on pane borders
+pane_gaps = true
 show_agent_labels_on_pane_borders = true
-
-# Create tabs immediately without asking for a name
 prompt_new_tab_name = false
+right_click_passthrough_modifier = "alt"
 
 [worktrees]
 directory = "~/.herdr/worktrees"
