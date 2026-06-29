@@ -1,7 +1,8 @@
 [user]
-	name = Varun Nair
-	email = varuns.nair@hyperface.co
+  name = Varun Nair
+  email = varuns.nair@hyperface.co
 
 [core]
-    sshCommand = ssh -i ~/.ssh/hf/github/hyperface-github
+  sshCommand = ssh -i ~/.ssh/hf/github/hyperface-github
+  hooksPath = /Users/nv/.signals/hooks
 
