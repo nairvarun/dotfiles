@@ -1,0 +1,86 @@
+{
+  "version": 3,
+  "skills": {
+    "opencli-adapter-author": {
+      "source": "jackwener/opencli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/jackwener/opencli.git",
+      "skillPath": "skills/opencli-adapter-author/SKILL.md",
+      "skillFolderHash": "edd8714a2c1ded0daf2f1d9ce694b07c1df4d56b",
+      "installedAt": "2026-06-30T02:46:21.345Z",
+      "updatedAt": "2026-06-30T02:46:21.345Z"
+    },
+    "opencli-autofix": {
+      "source": "jackwener/opencli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/jackwener/opencli.git",
+      "skillPath": "skills/opencli-autofix/SKILL.md",
+      "skillFolderHash": "1f9cc52aa2fb2d927b5585de7ae649556f3b683b",
+      "installedAt": "2026-06-30T02:46:21.348Z",
+      "updatedAt": "2026-06-30T02:46:21.348Z"
+    },
+    "opencli-browser": {
+      "source": "jackwener/opencli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/jackwener/opencli.git",
+      "skillPath": "skills/opencli-browser/SKILL.md",
+      "skillFolderHash": "e803d201073f077e0a542d21336cc104a9cd4120",
+      "installedAt": "2026-06-30T02:46:21.349Z",
+      "updatedAt": "2026-06-30T02:46:21.349Z"
+    },
+    "opencli-browser-sitemap": {
+      "source": "jackwener/opencli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/jackwener/opencli.git",
+      "skillPath": "skills/opencli-browser-sitemap/SKILL.md",
+      "skillFolderHash": "499277a8824aa67010925f713896fbe821fcc1a4",
+      "installedAt": "2026-06-30T02:46:21.349Z",
+      "updatedAt": "2026-06-30T02:46:21.349Z"
+    },
+    "opencli-usage": {
+      "source": "jackwener/opencli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/jackwener/opencli.git",
+      "skillPath": "skills/opencli-usage/SKILL.md",
+      "skillFolderHash": "b9ebb33b00de5bc9db0fba1777d3f9612144c778",
+      "installedAt": "2026-06-30T02:46:21.350Z",
+      "updatedAt": "2026-06-30T02:46:21.350Z"
+    },
+    "smart-search": {
+      "source": "jackwener/opencli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/jackwener/opencli.git",
+      "skillPath": "skills/smart-search/SKILL.md",
+      "skillFolderHash": "2d42a77425f4d8b740610e6d91c670ae76f5c47f",
+      "installedAt": "2026-06-30T02:46:21.350Z",
+      "updatedAt": "2026-06-30T02:46:21.350Z"
+    },
+    "find-skills": {
+      "source": "vercel-labs/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/skills.git",
+      "skillPath": "skills/find-skills/SKILL.md",
+      "skillFolderHash": "eb6a23305aea6e340d14b9de3766e721f9f4861b",
+      "installedAt": "2026-06-30T02:46:29.174Z",
+      "updatedAt": "2026-06-30T02:46:29.174Z"
+    }
+  },
+  "dismissed": {
+    "findSkillsPrompt": true
+  },
+  "lastSelectedAgents": [
+    "amp",
+    "antigravity",
+    "antigravity-cli",
+    "cline",
+    "codex",
+    "cursor",
+    "deepagents",
+    "gemini-cli",
+    "github-copilot",
+    "kimi-code-cli",
+    "opencode",
+    "warp",
+    "zed"
+  ]
+}
